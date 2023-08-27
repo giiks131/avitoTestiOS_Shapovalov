@@ -13,8 +13,8 @@
 		F2E93AFF2A9BD08000202208 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E93AFE2A9BD08000202208 /* Assets.xcassets */; };
 		F2E93B022A9BD08000202208 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2E93B002A9BD08000202208 /* LaunchScreen.storyboard */; };
 		F2E93B122A9BD2E200202208 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B112A9BD2E200202208 /* MainCoordinator.swift */; };
-		F2E93B142A9BD2F000202208 /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B132A9BD2F000202208 /* Advertisement.swift */; };
-		F2E93B162A9BD2FD00202208 /* AdvertisementDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B152A9BD2FD00202208 /* AdvertisementDetail.swift */; };
+		F2E93B142A9BD2F000202208 /* AdvertisementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B132A9BD2F000202208 /* AdvertisementModel.swift */; };
+		F2E93B162A9BD2FD00202208 /* AdvertisementDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B152A9BD2FD00202208 /* AdvertisementDetailModel.swift */; };
 		F2E93B182A9BD30900202208 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B172A9BD30900202208 /* ProductListView.swift */; };
 		F2E93B1A2A9BD30E00202208 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B192A9BD30E00202208 /* ProductDetailView.swift */; };
 		F2E93B202A9BD34900202208 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B1F2A9BD34900202208 /* NetworkManager.swift */; };
@@ -22,6 +22,7 @@
 		F2E93B242A9BD36C00202208 /* AvitoTestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B232A9BD36C00202208 /* AvitoTestAppTests.swift */; };
 		F2E93B262A9BD38000202208 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B252A9BD38000202208 /* ProductListViewController.swift */; };
 		F2E93B282A9BD39000202208 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B272A9BD39000202208 /* ProductDetailViewController.swift */; };
+		F2E93B2B2A9BD97100202208 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B2A2A9BD97100202208 /* ProductCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +34,8 @@
 		F2E93B012A9BD08000202208 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2E93B032A9BD08000202208 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2E93B112A9BD2E200202208 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		F2E93B132A9BD2F000202208 /* Advertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertisement.swift; sourceTree = "<group>"; };
-		F2E93B152A9BD2FD00202208 /* AdvertisementDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementDetail.swift; sourceTree = "<group>"; };
+		F2E93B132A9BD2F000202208 /* AdvertisementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementModel.swift; sourceTree = "<group>"; };
+		F2E93B152A9BD2FD00202208 /* AdvertisementDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementDetailModel.swift; sourceTree = "<group>"; };
 		F2E93B172A9BD30900202208 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		F2E93B192A9BD30E00202208 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		F2E93B1F2A9BD34900202208 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -42,6 +43,7 @@
 		F2E93B232A9BD36C00202208 /* AvitoTestAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvitoTestAppTests.swift; sourceTree = "<group>"; };
 		F2E93B252A9BD38000202208 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		F2E93B272A9BD39000202208 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		F2E93B2A2A9BD97100202208 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +104,8 @@
 		F2E93B0A2A9BD27C00202208 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F2E93B132A9BD2F000202208 /* Advertisement.swift */,
-				F2E93B152A9BD2FD00202208 /* AdvertisementDetail.swift */,
+				F2E93B132A9BD2F000202208 /* AdvertisementModel.swift */,
+				F2E93B152A9BD2FD00202208 /* AdvertisementDetailModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -111,6 +113,7 @@
 		F2E93B0C2A9BD28700202208 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F2E93B292A9BD96000202208 /* Cells */,
 				F2E93B172A9BD30900202208 /* ProductListView.swift */,
 				F2E93B192A9BD30E00202208 /* ProductDetailView.swift */,
 			);
@@ -148,6 +151,14 @@
 				F2E93B232A9BD36C00202208 /* AvitoTestAppTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		F2E93B292A9BD96000202208 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F2E93B2A2A9BD97100202208 /* ProductCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,13 +233,14 @@
 			files = (
 				F2E93AFA2A9BD07E00202208 /* ViewController.swift in Sources */,
 				F2E93B262A9BD38000202208 /* ProductListViewController.swift in Sources */,
+				F2E93B2B2A9BD97100202208 /* ProductCollectionViewCell.swift in Sources */,
 				F2E93B222A9BD35800202208 /* ViewState.swift in Sources */,
 				F2E93B1A2A9BD30E00202208 /* ProductDetailView.swift in Sources */,
 				F2E93B122A9BD2E200202208 /* MainCoordinator.swift in Sources */,
 				F2E93B202A9BD34900202208 /* NetworkManager.swift in Sources */,
 				F2E93B182A9BD30900202208 /* ProductListView.swift in Sources */,
-				F2E93B162A9BD2FD00202208 /* AdvertisementDetail.swift in Sources */,
-				F2E93B142A9BD2F000202208 /* Advertisement.swift in Sources */,
+				F2E93B162A9BD2FD00202208 /* AdvertisementDetailModel.swift in Sources */,
+				F2E93B142A9BD2F000202208 /* AdvertisementModel.swift in Sources */,
 				F2E93B282A9BD39000202208 /* ProductDetailViewController.swift in Sources */,
 				F2E93AF62A9BD07E00202208 /* AppDelegate.swift in Sources */,
 				F2E93B242A9BD36C00202208 /* AvitoTestAppTests.swift in Sources */,

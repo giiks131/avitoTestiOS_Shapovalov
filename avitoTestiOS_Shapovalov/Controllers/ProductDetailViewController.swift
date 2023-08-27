@@ -9,21 +9,40 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
 
+    var coordinator: MainCoordinator?
+    var advertisementId: String?
+    private let productDetailView = ProductDetailView()
+
+    override func loadView() {
+        view = productDetailView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        fetchData()
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func fetchData() {
+        guard let id = advertisementId else { return }
+        Task {
+            do {
+                let advertisementDetail = try await NetworkManager.shared.fetchAdvertisementDetail(for: id)
+                DispatchQueue.main.async {
+                    self.configureUI(with: advertisementDetail)
+                }
+            } catch {
+                // Handle error
+            }
+        }
     }
-    */
 
+    private func configureUI(with model: AdvertisementDetailModel) {
+        productDetailView.titleLabel.text = model.title
+        productDetailView.priceLabel.text = model.price
+        productDetailView.locationLabel.text = model.location
+        productDetailView.descriptionLabel.text = model.description
+        productDetailView.emailLabel.text = model.email
+        productDetailView.phoneNumberLabel.text = model.phoneNumber
+        productDetailView.addressLabel.text = model.address
+    }
 }
