@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum ViewState {
+    case loading
+    case error(Error)
+    case content
+}
