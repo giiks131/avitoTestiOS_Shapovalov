@@ -9,44 +9,40 @@
 
 import Foundation
 
+enum NetworkError: Error {
+    case badURL
+    case noData
+    case decodingError
+}
+
 class NetworkManager {
 
-    let baseURL = "https://www.avito.st/s/interns-ios/"
+    static let shared = NetworkManager()
 
-    enum NetworkError: Error {
-        case badURL
-        case decodingError
-    }
+    private init() {}
 
-    func fetchMainPage() async throws -> [Advertisement] {
-        let urlString = "\(baseURL)main-page.json"
-        guard let url = URL(string: urlString) else {
-            throw NetworkError.badURL
+    func fetchAdvertisements() async throws -> [AdvertisementModel] {
+            let urlString = "https://www.avito.st/s/interns-ios/main-page.json"
+            guard let url = URL(string: urlString) else {
+                throw NetworkError.badURL
+            }
+
+            let (data, _) = try await URLSession.shared.data(from: url)
+
+            do {
+                let decodedData = try JSONDecoder().decode(AdvertisementRoot.self, from: data)
+                return decodedData.advertisements
+            } catch {
+                throw NetworkError.decodingError
+            }
         }
+
+    func fetchAdvertisementDetail(for id: String) async throws -> AdvertisementDetailModel {
+        let urlString = "https://www.avito.st/s/interns-ios/details/\(id).json"
+        guard let url = URL(string: urlString) else { throw NetworkError.badURL }
 
         let (data, _) = try await URLSession.shared.data(from: url)
-
-        do {
-            let decodedData = try JSONDecoder().decode([Advertisement].self, from: data)
-            return decodedData
-        } catch {
-            throw NetworkError.decodingError
-        }
-    }
-
-    func fetchDetails(for id: String) async throws -> AdvertisementDetail {
-        let urlString = "\(baseURL)details/\(id).json"
-        guard let url = URL(string: urlString) else {
-            throw NetworkError.badURL
-        }
-
-        let (data, _) = try await URLSession.shared.data(from: url)
-
-        do {
-            let decodedData = try JSONDecoder().decode(AdvertisementDetail.self, from: data)
-            return decodedData
-        } catch {
-            throw NetworkError.decodingError
-        }
+        let decodedData = try JSONDecoder().decode(AdvertisementDetailModel.self, from: data)
+        return decodedData
     }
 }
