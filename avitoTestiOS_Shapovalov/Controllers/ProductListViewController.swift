@@ -8,55 +8,64 @@
 import UIKit
 
 class ProductListViewController: UIViewController {
-    
+
     var coordinator: MainCoordinator?
     private var advertisements: [AdvertisementModel] = []
     private let productListView = ProductListView()
-    
+
     private let refreshControl = UIRefreshControl()
-    
+    private var activityIndicator: UIActivityIndicatorView!
+
     override func loadView() {
         view = productListView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hello")
+        self.title = "Advertisements"
+        navigationItem.backButtonTitle = "Back"
+
+        setupLoadingIndicator()
         setupCollectionView()
         fetchData()
     }
-    
+
+    private func setupLoadingIndicator() {
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
+    }
+
     private func setupCollectionView() {
         productListView.collectionView.delegate = self
         productListView.collectionView.dataSource = self
         productListView.collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
+
         refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
         productListView.collectionView.refreshControl = refreshControl
     }
-    
+
     @objc private func reloadData() {
         fetchData { success in
-            if success {
-                self.refreshControl.endRefreshing()
-            } else {
-                self.refreshControl.endRefreshing()
-                // Show alert or some UI to indicate failure
-            }
+            self.refreshControl.endRefreshing()
         }
     }
-    
+
     private func fetchData(completion: ((Bool) -> Void)? = nil) {
+        activityIndicator.startAnimating()
+
         Task {
             do {
                 self.advertisements = try await NetworkManager.shared.fetchAdvertisements()
                 DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
                     self.productListView.collectionView.reloadData()
                     completion?(true)
                 }
             } catch {
                 print("Error fetching data: \(error)")
                 DispatchQueue.main.async {
-                    // Show an alert to the user
+                    self.activityIndicator.stopAnimating()
                     let alert = UIAlertController(title: "Error", message: "Failed to fetch advertisements. Please try again.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
@@ -77,7 +86,6 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as! ProductCollectionViewCell
         let advertisement = advertisements[indexPath.row]
         cell.configure(with: advertisement)
-        // Load image for the cell
         return cell
     }
 
@@ -91,6 +99,5 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 8) / 2
         return CGSize(width: width, height: width * 2)
-
     }
 }
