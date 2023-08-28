@@ -45,7 +45,7 @@ class ProductListViewController: UIViewController {
     }
 }
 
-extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return advertisements.count
@@ -65,11 +65,10 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
             coordinator.navigateToProductDetail(with: selectedAdvertisement.id)
         }
     }
-}
 
-extension ProductListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 8) / 2
-        return CGSize(width: width, height: width)
+        return CGSize(width: width, height: width * 2)
+
     }
 }
