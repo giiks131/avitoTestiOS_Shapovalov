@@ -20,7 +20,6 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Detail view loaded")
-        self.view.backgroundColor = .yellow 
         fetchData()
     }
 
@@ -46,5 +45,10 @@ class ProductDetailViewController: UIViewController {
         productDetailView.emailLabel.text = model.email
         productDetailView.phoneNumberLabel.text = model.phone_number
         productDetailView.addressLabel.text = model.address
+
+        if let imageUrl = URL(string: model.image_url) {
+            productDetailView.productImageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder"))
+        }
     }
 }
+
