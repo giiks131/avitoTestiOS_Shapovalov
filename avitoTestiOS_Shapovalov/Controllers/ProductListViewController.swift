@@ -34,7 +34,6 @@ class ProductListViewController: UIViewController {
         Task {
             do {
                 self.advertisements = try await NetworkManager.shared.fetchAdvertisements()
-                print(advertisements)
                 DispatchQueue.main.async {
                     self.productListView.collectionView.reloadData()
                 }
