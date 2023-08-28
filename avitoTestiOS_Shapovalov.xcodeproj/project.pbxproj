@@ -23,6 +23,7 @@
 		F2E93B262A9BD38000202208 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B252A9BD38000202208 /* ProductListViewController.swift */; };
 		F2E93B282A9BD39000202208 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B272A9BD39000202208 /* ProductDetailViewController.swift */; };
 		F2E93B2B2A9BD97100202208 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B2A2A9BD97100202208 /* ProductCollectionViewCell.swift */; };
+		F2E93B2E2A9D4A4300202208 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B2D2A9D4A4300202208 /* UIImageView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		F2E93B252A9BD38000202208 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		F2E93B272A9BD39000202208 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		F2E93B2A2A9BD97100202208 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		F2E93B2D2A9D4A4300202208 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				F2E93B0D2A9BD28C00202208 /* Controllers */,
 				F2E93B0E2A9BD29500202208 /* Networking */,
 				F2E93B0F2A9BD29B00202208 /* Enums */,
+				F2E93B2C2A9D4A3200202208 /* Extensions */,
 				F2E93B102A9BD2A200202208 /* Tests */,
 			);
 			path = avitoTestiOS_Shapovalov;
@@ -161,6 +164,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F2E93B2C2A9D4A3200202208 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F2E93B2D2A9D4A4300202208 /* UIImageView+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -231,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2E93B2E2A9D4A4300202208 /* UIImageView+Extensions.swift in Sources */,
 				F2E93AFA2A9BD07E00202208 /* ViewController.swift in Sources */,
 				F2E93B262A9BD38000202208 /* ProductListViewController.swift in Sources */,
 				F2E93B2B2A9BD97100202208 /* ProductCollectionViewCell.swift in Sources */,

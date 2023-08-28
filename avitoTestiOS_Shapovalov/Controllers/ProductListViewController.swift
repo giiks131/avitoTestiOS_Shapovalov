@@ -53,7 +53,9 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as! ProductCollectionViewCell
-        cell.configure(with: advertisements[indexPath.row])
+        let advertisement = advertisements[indexPath.row]
+        cell.configure(with: advertisement)
+        // Load image for the cell
         return cell
     }
 
@@ -62,5 +64,12 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
             let selectedAdvertisement = advertisements[indexPath.row]
             coordinator.navigateToProductDetail(with: selectedAdvertisement.id)
         }
+    }
+}
+
+extension ProductListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width - 8) / 2
+        return CGSize(width: width, height: width)
     }
 }

@@ -11,6 +11,14 @@ class ProductCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "ProductCollectionViewCell"
 
+    lazy var productImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "SFProText-Semibold", size: 16)
@@ -42,16 +50,21 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
 
     private func setupUI() {
+        addSubview(productImageView)
         addSubview(titleLabel)
         addSubview(priceLabel)
         addSubview(locationLabel)
-
         setupConstraints()
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            productImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            productImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            productImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            productImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
+
+            titleLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
 
@@ -68,5 +81,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
         titleLabel.text = model.title
         priceLabel.text = model.price
         locationLabel.text = model.location
+        if let imageUrl = URL(string: model.imageUrl) {
+            productImageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder"))
+        }
     }
 }
