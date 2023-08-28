@@ -13,6 +13,8 @@ class ProductListViewController: UIViewController {
     private var advertisements: [AdvertisementModel] = []
     private let productListView = ProductListView()
 
+    private let refreshControl = UIRefreshControl()
+
     override func loadView() {
         view = productListView
     }
@@ -28,21 +30,38 @@ class ProductListViewController: UIViewController {
         productListView.collectionView.delegate = self
         productListView.collectionView.dataSource = self
         productListView.collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        productListView.collectionView.refreshControl = refreshControl
     }
 
-    private func fetchData() {
-        Task {
-            do {
-                self.advertisements = try await NetworkManager.shared.fetchAdvertisements()
-                DispatchQueue.main.async {
-                    self.productListView.collectionView.reloadData()
-                }
-            } catch {
-                print("Error fetching data: \(error)")
-            }
-        }
-    }
-}
+    @objc private func reloadData() {
+         fetchData { success in
+             if success {
+                 self.refreshControl.endRefreshing()
+             } else {
+                 self.refreshControl.endRefreshing()
+                 // Show alert or some UI to indicate failure
+             }
+         }
+     }
+
+    private func fetchData(completion: ((Bool) -> Void)? = nil) {
+         Task {
+             do {
+                 self.advertisements = try await NetworkManager.shared.fetchAdvertisements()
+                 DispatchQueue.main.async {
+                     self.productListView.collectionView.reloadData()
+                     completion?(true)
+                 }
+             } catch {
+                 print("Error fetching data: \(error)")
+                 DispatchQueue.main.async {
+                     completion?(false)
+                 }
+             }
+         }
+     }
+ }
 
 extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
