@@ -12,10 +12,10 @@ struct AdvertisementDetailModel: Codable {
     let title: String
     let price: String
     let location: String
-    let imageUrl: String
-    let createdDate: String
+    let image_url: String
+    let created_date: String
     let description: String
     let email: String
-    let phoneNumber: String
+    let phone_number: String
     let address: String
 }

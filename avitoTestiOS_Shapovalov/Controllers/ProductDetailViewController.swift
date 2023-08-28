@@ -19,6 +19,8 @@ class ProductDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Detail view loaded")
+        self.view.backgroundColor = .yellow 
         fetchData()
     }
 
@@ -31,7 +33,7 @@ class ProductDetailViewController: UIViewController {
                     self.configureUI(with: advertisementDetail)
                 }
             } catch {
-                // Handle error
+                print("Error fetching data: \(error)")
             }
         }
     }
@@ -42,7 +44,7 @@ class ProductDetailViewController: UIViewController {
         productDetailView.locationLabel.text = model.location
         productDetailView.descriptionLabel.text = model.description
         productDetailView.emailLabel.text = model.email
-        productDetailView.phoneNumberLabel.text = model.phoneNumber
+        productDetailView.phoneNumberLabel.text = model.phone_number
         productDetailView.addressLabel.text = model.address
     }
 }
