@@ -31,6 +31,8 @@ class ProductListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Advertisements"
+//        navigationController?.navigationBar.isTranslucent = false
+        
         
         setupLoadingView()
         setupRetryButton()
