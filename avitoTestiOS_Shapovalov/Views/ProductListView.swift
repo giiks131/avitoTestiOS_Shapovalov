@@ -8,7 +8,7 @@
 import UIKit
 
 class ProductListView: UIView {
-
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -19,7 +19,7 @@ class ProductListView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-
+    
     let errorLabel: UILabel = {
         let label = UILabel()
         label.text = "An error occurred"
@@ -27,7 +27,7 @@ class ProductListView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     let retryButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Retry", for: .normal)
@@ -35,7 +35,7 @@ class ProductListView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(collectionView)
@@ -43,11 +43,11 @@ class ProductListView: UIView {
         addSubview(retryButton)
         setupConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),

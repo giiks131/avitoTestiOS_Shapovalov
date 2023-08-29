@@ -14,10 +14,10 @@ class ProductDetailViewController: UIViewController {
     private let productDetailView = ProductDetailView()
 
     private var viewState: ViewState = .loading {
-            didSet {
-                updateUI()
-            }
+        didSet {
+            updateUI()
         }
+    }
 
     override func loadView() {
         view = productDetailView
@@ -28,7 +28,8 @@ class ProductDetailViewController: UIViewController {
         print("Detail view loaded")
 
         let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
-            navigationItem.leftBarButtonItem = backButton
+        navigationItem.leftBarButtonItem = backButton
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
         productDetailView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
         fetchData()
@@ -40,26 +41,26 @@ class ProductDetailViewController: UIViewController {
     }
 
     @objc private func retryFetchingData() {
-            fetchData()
-        }
+        fetchData()
+    }
 
     private func fetchData() {
-           guard let id = advertisementId else { return }
-           viewState = .loading
-           Task {
-               do {
-                   let advertisementDetail = try await NetworkManager.shared.fetchAdvertisementDetail(for: id)
-                   DispatchQueue.main.async {
-                       self.configureUI(with: advertisementDetail)
-                       self.viewState = .content
-                   }
-               } catch {
-                   DispatchQueue.main.async {
-                       self.viewState = .error(error)
-                   }
-               }
-           }
-       }
+        guard let id = advertisementId else { return }
+        viewState = .loading
+        Task {
+            do {
+                let advertisementDetail = try await NetworkManager.shared.fetchAdvertisementDetail(for: id)
+                DispatchQueue.main.async {
+                    self.configureUI(with: advertisementDetail)
+                    self.viewState = .content
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.viewState = .error(error)
+                }
+            }
+        }
+    }
 
     private func configureUI(with model: AdvertisementDetailModel) {
         if let imageUrl = URL(string: model.image_url) {
@@ -78,19 +79,19 @@ class ProductDetailViewController: UIViewController {
 
     private func updateUI() {
         switch viewState {
-               case .loading:
-                   productDetailView.activityIndicator.startAnimating()
-                   productDetailView.errorLabel.isHidden = true
-                   productDetailView.retryButton.isHidden = true
-               case .error:
-                   productDetailView.activityIndicator.stopAnimating()
-                   productDetailView.errorLabel.isHidden = false
-                   productDetailView.retryButton.isHidden = false
-               case .content:
-                   productDetailView.activityIndicator.stopAnimating()
-                   productDetailView.errorLabel.isHidden = true
-                   productDetailView.retryButton.isHidden = true
-            }
+        case .loading:
+            productDetailView.activityIndicator.startAnimating()
+            productDetailView.errorLabel.isHidden = true
+            productDetailView.retryButton.isHidden = true
+        case .error:
+            productDetailView.activityIndicator.stopAnimating()
+            productDetailView.errorLabel.isHidden = false
+            productDetailView.retryButton.isHidden = false
+        case .content:
+            productDetailView.activityIndicator.stopAnimating()
+            productDetailView.errorLabel.isHidden = true
+            productDetailView.retryButton.isHidden = true
         }
+    }
 }
 
