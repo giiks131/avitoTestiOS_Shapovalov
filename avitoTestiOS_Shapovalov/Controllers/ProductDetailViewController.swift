@@ -27,8 +27,16 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
         print("Detail view loaded")
 
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+            navigationItem.leftBarButtonItem = backButton
+
         productDetailView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
         fetchData()
+    }
+
+    @objc func backButtonTapped() {
+        // Perform the navigation back action or dismiss the view controller
+        self.navigationController?.popViewController(animated: true)
     }
 
     @objc private func retryFetchingData() {

@@ -114,7 +114,7 @@ class ProductDetailView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            productImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            productImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             productImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             productImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             productImageView.heightAnchor.constraint(equalToConstant: 300),
