@@ -20,9 +20,27 @@ class ProductListView: UIView {
         return collectionView
     }()
 
+    let errorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "An error occurred"
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    let retryButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Retry", for: .normal)
+        button.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(collectionView)
+        addSubview(errorLabel)
+        addSubview(retryButton)
         setupConstraints()
     }
 
@@ -35,7 +53,12 @@ class ProductListView: UIView {
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            
+            errorLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            errorLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            retryButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            retryButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 8)
         ])
     }
 }

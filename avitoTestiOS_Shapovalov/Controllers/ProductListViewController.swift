@@ -16,6 +16,13 @@ class ProductListViewController: UIViewController {
     private let refreshControl = UIRefreshControl()
     private var activityIndicator: UIActivityIndicatorView!
 
+    // ViewState property to manage UI states
+    private var viewState: ViewState = .loading {
+        didSet {
+            updateUI()
+        }
+    }
+
     override func loadView() {
         view = productListView
     }
@@ -25,10 +32,19 @@ class ProductListViewController: UIViewController {
         self.title = "Advertisements"
         navigationItem.backButtonTitle = "Back"
 
+        setupRetryButton()
         setupLoadingIndicator()
         setupCollectionView()
         fetchData()
     }
+
+    private func setupRetryButton() {
+            productListView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
+        }
+
+    @objc private func retryFetchingData() {
+           fetchData()
+       }
 
     private func setupLoadingIndicator() {
         activityIndicator = UIActivityIndicatorView(style: .large)
@@ -52,29 +68,45 @@ class ProductListViewController: UIViewController {
     }
 
     private func fetchData(completion: ((Bool) -> Void)? = nil) {
-        activityIndicator.startAnimating()
-
+        viewState = .loading
         Task {
             do {
                 self.advertisements = try await NetworkManager.shared.fetchAdvertisements()
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.productListView.collectionView.reloadData()
+                    self.viewState = .content
                     completion?(true)
                 }
             } catch {
-                print("Error fetching data: \(error)")
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    let alert = UIAlertController(title: "Error", message: "Failed to fetch advertisements. Please try again.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    self.viewState = .error(error)
                     completion?(false)
                 }
             }
         }
     }
-}
+
+    // Function to update UI based on ViewState
+    private func updateUI() {
+          switch viewState {
+          case .loading:
+              activityIndicator.startAnimating()
+              productListView.collectionView.isHidden = true
+              productListView.errorLabel.isHidden = true
+              productListView.retryButton.isHidden = true
+          case .error:
+              activityIndicator.stopAnimating()
+              productListView.collectionView.isHidden = true
+              productListView.errorLabel.isHidden = false
+              productListView.retryButton.isHidden = false
+          case .content:
+              activityIndicator.stopAnimating()
+              productListView.collectionView.isHidden = false
+              productListView.errorLabel.isHidden = true
+              productListView.retryButton.isHidden = true
+              productListView.collectionView.reloadData()
+          }
+      }
+  }
 
 extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 

@@ -112,10 +112,3 @@ class ProductCollectionViewCell: UICollectionViewCell {
             dateLabel.text = model.createdDate
         }
 }
-
-
-
-//productImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-//productImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-//productImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-//productImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
