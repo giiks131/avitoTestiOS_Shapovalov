@@ -15,7 +15,7 @@ enum NetworkError: Error {
     case decodingError
 }
 
-class NetworkManager {
+class NetworkManager: NetworkFetchable {
 
     static let shared = NetworkManager()
 
@@ -49,4 +49,10 @@ class NetworkManager {
         let detail: AdvertisementDetailModel = try await fetchData(from: urlString)
         return detail
     }
+}
+
+
+protocol NetworkFetchable {
+    func fetchAdvertisements() async throws -> [AdvertisementModel]
+    func fetchAdvertisementDetail(for id: String) async throws -> AdvertisementDetailModel
 }
