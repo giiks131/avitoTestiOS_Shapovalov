@@ -54,18 +54,19 @@ class ProductDetailViewController: UIViewController {
        }
 
     private func configureUI(with model: AdvertisementDetailModel) {
-        productDetailView.titleLabel.text = model.title
-        productDetailView.priceLabel.text = model.price
-        productDetailView.locationLabel.text = model.location
-        productDetailView.descriptionLabel.text = model.description
-        productDetailView.emailLabel.text = model.email
-        productDetailView.phoneNumberLabel.text = model.phone_number
-        productDetailView.addressLabel.text = model.address
-
         if let imageUrl = URL(string: model.image_url) {
-            productDetailView.productImageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder"))
+            productDetailView.productImageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder")) {
+                self.productDetailView.titleLabel.text = model.title
+                self.productDetailView.priceLabel.text = model.price
+                self.productDetailView.locationLabel.text = model.location
+                self.productDetailView.descriptionLabel.text = model.description
+                self.productDetailView.emailLabel.text = model.email
+                self.productDetailView.phoneNumberLabel.text = model.phone_number
+                self.productDetailView.addressLabel.text = model.address
+            }
         }
     }
+
 
     private func updateUI() {
         switch viewState {
