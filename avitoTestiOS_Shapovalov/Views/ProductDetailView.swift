@@ -68,29 +68,6 @@ class ProductDetailView: UIView {
         return label
     }()
     
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        return activityIndicator
-    }()
-    
-    lazy var errorLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .red
-        label.textAlignment = .center
-        label.text = "An error occurred"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var retryButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Retry", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -102,9 +79,6 @@ class ProductDetailView: UIView {
         addSubview(emailLabel)
         addSubview(phoneNumberLabel)
         addSubview(addressLabel)
-        addSubview(activityIndicator)
-        addSubview(errorLabel)
-        addSubview(retryButton)
         setupConstraints()
     }
     
@@ -145,16 +119,7 @@ class ProductDetailView: UIView {
             
             addressLabel.topAnchor.constraint(equalTo: phoneNumberLabel.bottomAnchor, constant: 16),
             addressLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            addressLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            
-            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            
-            errorLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            errorLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            
-            retryButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            retryButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 16)
+            addressLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
         ])
     }
     

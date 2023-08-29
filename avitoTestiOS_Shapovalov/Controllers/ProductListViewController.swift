@@ -13,8 +13,9 @@ class ProductListViewController: UIViewController {
     private var advertisements: [AdvertisementModel] = []
     private let productListView = ProductListView()
     
+    private var loadingView = LoadingView()
+    
     private let refreshControl = UIRefreshControl()
-    private var activityIndicator: UIActivityIndicatorView!
     
     // ViewState property to manage UI states
     private var viewState: ViewState = .loading {
@@ -30,26 +31,31 @@ class ProductListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Advertisements"
-        navigationItem.backButtonTitle = "Back"
         
+        setupLoadingView()
         setupRetryButton()
-        setupLoadingIndicator()
         setupCollectionView()
         fetchData()
     }
     
     private func setupRetryButton() {
-        productListView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
+        loadingView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
     }
     
     @objc private func retryFetchingData() {
         fetchData()
     }
     
-    private func setupLoadingIndicator() {
-        activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.center = view.center
-        view.addSubview(activityIndicator)
+    private func setupLoadingView() {
+        view.addSubview(loadingView)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingView.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        loadingView.isUserInteractionEnabled = true
     }
     
     private func setupCollectionView() {
@@ -89,23 +95,20 @@ class ProductListViewController: UIViewController {
     private func updateUI() {
         switch viewState {
         case .loading:
-            activityIndicator.startAnimating()
-            productListView.collectionView.isHidden = true
-            productListView.errorLabel.isHidden = true
-            productListView.retryButton.isHidden = true
+            loadingView.showLoading()
+            view.bringSubviewToFront(loadingView)
         case .error:
-            activityIndicator.stopAnimating()
-            productListView.collectionView.isHidden = true
-            productListView.errorLabel.isHidden = false
-            productListView.retryButton.isHidden = false
+            loadingView.showError()
+            view.bringSubviewToFront(loadingView)
         case .content:
-            activityIndicator.stopAnimating()
-            productListView.collectionView.isHidden = false
-            productListView.errorLabel.isHidden = true
-            productListView.retryButton.isHidden = true
+            loadingView.hide()
+            view.sendSubviewToBack(loadingView)
             productListView.collectionView.reloadData()
         }
     }
+    
+    
+    
 }
 
 extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2AB11222A9E693D008D9B67 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11212A9E693D008D9B67 /* LoadingView.swift */; };
 		F2E93AF62A9BD07E00202208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF52A9BD07E00202208 /* AppDelegate.swift */; };
 		F2E93AF82A9BD07E00202208 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */; };
 		F2E93AFA2A9BD07E00202208 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF92A9BD07E00202208 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F2AB11212A9E693D008D9B67 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		F2E93AF22A9BD07E00202208 /* avitoTestiOS_Shapovalov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = avitoTestiOS_Shapovalov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E93AF52A9BD07E00202208 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				F2E93B292A9BD96000202208 /* Cells */,
 				F2E93B172A9BD30900202208 /* ProductListView.swift */,
 				F2E93B192A9BD30E00202208 /* ProductDetailView.swift */,
+				F2AB11212A9E693D008D9B67 /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				F2E93B262A9BD38000202208 /* ProductListViewController.swift in Sources */,
 				F2E93B2B2A9BD97100202208 /* ProductCollectionViewCell.swift in Sources */,
 				F2E93B222A9BD35800202208 /* ViewState.swift in Sources */,
+				F2AB11222A9E693D008D9B67 /* LoadingView.swift in Sources */,
 				F2E93B1A2A9BD30E00202208 /* ProductDetailView.swift in Sources */,
 				F2E93B122A9BD2E200202208 /* MainCoordinator.swift in Sources */,
 				F2E93B202A9BD34900202208 /* NetworkManager.swift in Sources */,
