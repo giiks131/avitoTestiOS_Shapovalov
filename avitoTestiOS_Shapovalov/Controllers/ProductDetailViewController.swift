@@ -13,6 +13,12 @@ class ProductDetailViewController: UIViewController {
     var advertisementId: String?
     private let productDetailView = ProductDetailView()
 
+    private var viewState: ViewState = .loading {
+            didSet {
+                updateUI()
+            }
+        }
+
     override func loadView() {
         view = productDetailView
     }
@@ -20,22 +26,32 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Detail view loaded")
+
+        productDetailView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
         fetchData()
     }
 
-    private func fetchData() {
-        guard let id = advertisementId else { return }
-        Task {
-            do {
-                let advertisementDetail = try await NetworkManager.shared.fetchAdvertisementDetail(for: id)
-                DispatchQueue.main.async {
-                    self.configureUI(with: advertisementDetail)
-                }
-            } catch {
-                print("Error fetching data: \(error)")
-            }
+    @objc private func retryFetchingData() {
+            fetchData()
         }
-    }
+
+    private func fetchData() {
+           guard let id = advertisementId else { return }
+           viewState = .loading
+           Task {
+               do {
+                   let advertisementDetail = try await NetworkManager.shared.fetchAdvertisementDetail(for: id)
+                   DispatchQueue.main.async {
+                       self.configureUI(with: advertisementDetail)
+                       self.viewState = .content
+                   }
+               } catch {
+                   DispatchQueue.main.async {
+                       self.viewState = .error(error)
+                   }
+               }
+           }
+       }
 
     private func configureUI(with model: AdvertisementDetailModel) {
         productDetailView.titleLabel.text = model.title
@@ -50,5 +66,22 @@ class ProductDetailViewController: UIViewController {
             productDetailView.productImageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder"))
         }
     }
+
+    private func updateUI() {
+        switch viewState {
+               case .loading:
+                   productDetailView.activityIndicator.startAnimating()
+                   productDetailView.errorLabel.isHidden = true
+                   productDetailView.retryButton.isHidden = true
+               case .error:
+                   productDetailView.activityIndicator.stopAnimating()
+                   productDetailView.errorLabel.isHidden = false
+                   productDetailView.retryButton.isHidden = false
+               case .content:
+                   productDetailView.activityIndicator.stopAnimating()
+                   productDetailView.errorLabel.isHidden = true
+                   productDetailView.retryButton.isHidden = true
+            }
+        }
 }
 
