@@ -14,41 +14,46 @@ class ProductCollectionViewCell: UICollectionViewCell {
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true  // Clip it to bounds
+        imageView.layer.cornerRadius = 8
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "SFProText-Semibold", size: 16)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         label.numberOfLines = 2
+        label.lineBreakMode = .byTruncatingTail
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "SFProText-Bold", size: 18)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     lazy var locationLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "SFProText-Regular", size: 12)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "SFProText-Regular", size: 12)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -81,26 +86,40 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            // Constraints for imageView
             imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
-            
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 28),
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor), // Square aspect ratio
+
+            // Constraints for titleLabel
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
+            titleLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 40),
+
+            // Constraints for priceLabel
             priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            priceLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            
+            priceLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+            priceLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
+            priceLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 24),
+
+            // Constraints for locationLabel
             locationLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 8),
-            locationLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            
-            dateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 8),
-            dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            dateLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
+            locationLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+            locationLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
+            locationLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 18),
+
+
+            // Constraints for dateLabel
+            dateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+            dateLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
+            dateLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
+            dateLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 18),
         ])
     }
+
     
     func configure(with model: AdvertisementModel) {
         if let imageUrl = URL(string: model.imageUrl) {
@@ -109,6 +128,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
                 self.priceLabel.text = model.price
                 self.locationLabel.text = model.location
                 self.dateLabel.text = model.createdDate
+                self.layoutIfNeeded()
             }
         }
     }
