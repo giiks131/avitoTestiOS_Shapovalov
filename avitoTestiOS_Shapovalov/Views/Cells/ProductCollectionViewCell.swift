@@ -61,6 +61,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        setupConstraints()
     }
     
     // Prepare for cell reuse
@@ -85,38 +86,29 @@ class ProductCollectionViewCell: UICollectionViewCell {
         addSubview(priceLabel)
         addSubview(locationLabel)
         addSubview(dateLabel)
-        setupConstraints()
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // Constraints for imageView
             imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor), // Square aspect ratio
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
             
-            // Constraints for titleLabel
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
-            titleLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 40),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             
-            // Constraints for priceLabel
             priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            priceLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
-            priceLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
-            priceLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 24),
+            priceLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            priceLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             
-            // Constraints for locationLabel
             locationLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 8),
             locationLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
             locationLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
             locationLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 18),
             
-            
-            // Constraints for dateLabel
-            dateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor),
+            dateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 0),
             dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
             dateLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
             dateLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
