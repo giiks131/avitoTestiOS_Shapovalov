@@ -99,6 +99,14 @@ class ProductDetailView: UIView {
         return label
     }()
 
+    lazy var createdDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     // Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -125,7 +133,7 @@ class ProductDetailView: UIView {
         contentView.addSubview(descriptionText)
         contentView.addSubview(emailLabel)
         contentView.addSubview(phoneNumberLabel)
-        setupConstraints()
+        contentView.addSubview(createdDateLabel)
     }
 
     // Setup Constraints
@@ -185,6 +193,10 @@ class ProductDetailView: UIView {
             phoneNumberLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 8),
             phoneNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             phoneNumberLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+
+            createdDateLabel.topAnchor.constraint(equalTo: phoneNumberLabel.bottomAnchor, constant: 8),
+            createdDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            createdDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
         ])
     }

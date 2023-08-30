@@ -101,6 +101,10 @@ class ProductDetailViewController: UIViewController {
                 self.productDetailView.emailLabel.text = model.email
                 self.productDetailView.phoneNumberLabel.text = model.phoneNumber
                 self.productDetailView.addressLabel.text = model.address
+
+                if let formattedDate = DateFormatterUtility.formatDate(from: model.createdDate, fromFormat: "yyyy-MM-dd", toFormat: "dd MMMM yyyy") {
+                    self.productDetailView.createdDateLabel.text = formattedDate
+                }
             }
         }
     }

@@ -31,13 +31,13 @@ class ProductListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Advertisements"
-
+        
         setupLoadingView()
         setupRetryButton()
         setupCollectionView()
         fetchData()
     }
-
+    
     // MARK: - Setup Methods
     private func setupRetryButton() {
         loadingView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
@@ -67,7 +67,7 @@ class ProductListViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
         productListView.collectionView.refreshControl = refreshControl
     }
-
+    
     // MARK: - Data Fetching
     @objc private func reloadData() {
         fetchData { success in
