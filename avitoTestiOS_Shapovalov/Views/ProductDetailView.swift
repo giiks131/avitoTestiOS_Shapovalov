@@ -38,13 +38,27 @@ class ProductDetailView: UIView {
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 28, weight: .regular)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
+    lazy var titleSeparator: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     lazy var locationLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    lazy var addressLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +67,16 @@ class ProductDetailView: UIView {
 
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.text = "Описание"
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    lazy var descriptionText: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,6 +85,7 @@ class ProductDetailView: UIView {
     lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -69,13 +93,7 @@ class ProductDetailView: UIView {
     lazy var phoneNumberLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    lazy var addressLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -88,11 +106,13 @@ class ProductDetailView: UIView {
         contentView.addSubview(productImageView)
         contentView.addSubview(priceLabel)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(titleSeparator)
         contentView.addSubview(locationLabel)
+        contentView.addSubview(addressLabel)
         contentView.addSubview(descriptionLabel)
+        contentView.addSubview(descriptionText)
         contentView.addSubview(emailLabel)
         contentView.addSubview(phoneNumberLabel)
-        contentView.addSubview(addressLabel)
         setupConstraints()
     }
 
@@ -122,31 +142,41 @@ class ProductDetailView: UIView {
             priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            titleLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            
+            titleSeparator.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            titleSeparator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            titleSeparator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            titleSeparator.heightAnchor.constraint(equalToConstant: 1),
 
-            locationLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            locationLabel.topAnchor.constraint(equalTo: titleSeparator.bottomAnchor, constant: 16),
             locationLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             locationLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            descriptionLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16),
+            addressLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16),
+            addressLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            addressLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            addressLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+
+            descriptionLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 24),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            emailLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+
+            descriptionText.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            descriptionText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+
+            emailLabel.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 24),
             emailLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             emailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            phoneNumberLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 16),
+            phoneNumberLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 8),
             phoneNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             phoneNumberLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
-            addressLabel.topAnchor.constraint(equalTo: phoneNumberLabel.bottomAnchor, constant: 16),
-            addressLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            addressLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
-            addressLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            
         ])
     }
 }

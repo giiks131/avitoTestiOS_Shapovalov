@@ -86,7 +86,7 @@ class ProductDetailViewController: UIViewController {
                 self.productDetailView.titleLabel.text = model.title
                 self.productDetailView.priceLabel.text = model.price
                 self.productDetailView.locationLabel.text = model.location
-                self.productDetailView.descriptionLabel.text = model.description
+                self.productDetailView.descriptionText.text = model.description
                 self.productDetailView.emailLabel.text = model.email
                 self.productDetailView.phoneNumberLabel.text = model.phone_number
                 self.productDetailView.addressLabel.text = model.address
