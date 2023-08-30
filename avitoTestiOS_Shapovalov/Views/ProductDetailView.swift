@@ -7,8 +7,10 @@
 
 import UIKit
 
+// Custom UIView containing details for a single product
 class ProductDetailView: UIView {
 
+    // UI Elements
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +22,6 @@ class ProductDetailView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
     lazy var productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -98,9 +99,28 @@ class ProductDetailView: UIView {
         return label
     }()
 
+    lazy var createdDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    // Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        setupUIElements()
+        setupConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // Setup UI Elements
+    private func setupUIElements() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(productImageView)
@@ -113,13 +133,10 @@ class ProductDetailView: UIView {
         contentView.addSubview(descriptionText)
         contentView.addSubview(emailLabel)
         contentView.addSubview(phoneNumberLabel)
-        setupConstraints()
+        contentView.addSubview(createdDateLabel)
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
+    // Setup Constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -176,6 +193,10 @@ class ProductDetailView: UIView {
             phoneNumberLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 8),
             phoneNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             phoneNumberLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+
+            createdDateLabel.topAnchor.constraint(equalTo: phoneNumberLabel.bottomAnchor, constant: 8),
+            createdDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            createdDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
         ])
     }

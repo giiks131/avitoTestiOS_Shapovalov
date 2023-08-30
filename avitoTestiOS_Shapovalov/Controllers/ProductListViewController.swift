@@ -17,7 +17,7 @@ class ProductListViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
-    // ViewState property to manage UI states
+    // Property to manage UI states
     private var viewState: ViewState = .loading {
         didSet {
             updateUI()
@@ -31,8 +31,6 @@ class ProductListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Advertisements"
-//        navigationController?.navigationBar.isTranslucent = false
-        
         
         setupLoadingView()
         setupRetryButton()
@@ -40,6 +38,7 @@ class ProductListViewController: UIViewController {
         fetchData()
     }
     
+    // MARK: - Setup Methods
     private func setupRetryButton() {
         loadingView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
     }
@@ -69,6 +68,7 @@ class ProductListViewController: UIViewController {
         productListView.collectionView.refreshControl = refreshControl
     }
     
+    // MARK: - Data Fetching
     @objc private func reloadData() {
         fetchData { success in
             self.refreshControl.endRefreshing()
@@ -93,7 +93,7 @@ class ProductListViewController: UIViewController {
         }
     }
     
-    // Function to update UI based on ViewState
+    // MARK: - UI Update
     private func updateUI() {
         switch viewState {
         case .loading:
@@ -108,11 +108,9 @@ class ProductListViewController: UIViewController {
             productListView.collectionView.reloadData()
         }
     }
-    
-    
-    
 }
 
+// MARK: - UICollectionViewDelegate & Data Source
 extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

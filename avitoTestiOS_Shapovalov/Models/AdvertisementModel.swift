@@ -7,13 +7,14 @@
 
 import Foundation
 
+// Model representing a summary of an advertisement
 struct AdvertisementModel: Codable {
-    let id: String
-    let title: String
-    let price: String
-    let location: String
-    let imageUrl: String
-    let createdDate: String
+    let id: String          // Unique identifier for the advertisement
+    let title: String       // Title of the advertisement
+    let price: String       // Price of the item being advertised
+    let location: String    // Location where the item is being sold
+    let imageUrl: String    // URL of the image of the item
+    let createdDate: String // Date when the advertisement was created
 
     enum CodingKeys: String, CodingKey {
         case id, title, price, location
@@ -22,6 +23,7 @@ struct AdvertisementModel: Codable {
     }
 }
 
+// Root model that wraps an array of AdvertisementModel objects
 struct AdvertisementRoot: Codable {
-    let advertisements: [AdvertisementModel]
+    let advertisements: [AdvertisementModel] // Array of advertisements
 }

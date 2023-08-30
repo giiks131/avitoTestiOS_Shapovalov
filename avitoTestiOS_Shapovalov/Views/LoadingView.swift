@@ -7,7 +7,10 @@
 
 import UIKit
 
+// A custom UIView to handle loading and error states
 class LoadingView: UIView {
+    
+    // UI Elements
     let activityIndicator = UIActivityIndicatorView(style: .large)
     
     let errorLabel: UILabel = {
@@ -15,34 +18,40 @@ class LoadingView: UIView {
         label.text = "An error occurred"
         label.isHidden = true
         label.textColor = .red
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     let retryButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Retry", for: .normal)
         button.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    // Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setupView()
+        setupUIElements()
+        setupConstraints()
     }
     
+    // Required init
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView() {
+    // Setup UI Elements
+    private func setupUIElements() {
         addSubview(activityIndicator)
         addSubview(errorLabel)
         addSubview(retryButton)
-        
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        retryButton.translatesAutoresizingMaskIntoConstraints = false
-        
+    }
+    
+    // Setup Constraints
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
@@ -55,18 +64,21 @@ class LoadingView: UIView {
         ])
     }
     
+    // Show loading state
     func showLoading() {
         activityIndicator.startAnimating()
         errorLabel.isHidden = true
         retryButton.isHidden = true
     }
     
+    // Show error state
     func showError() {
         activityIndicator.stopAnimating()
         errorLabel.isHidden = false
         retryButton.isHidden = false
     }
     
+    // Hide loading view
     func hide() {
         activityIndicator.stopAnimating()
         self.isHidden = true

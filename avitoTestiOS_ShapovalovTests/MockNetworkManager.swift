@@ -9,7 +9,9 @@ import Foundation
 
 @testable import avitoTestiOS_Shapovalov
 
+// Mock implementation of the NetworkFetchable protocol for testing purposes
 class MockNetworkManager: NetworkFetchable {
+    // Mock fetchAdvertisements() to return a predefined list of advertisements
     func fetchAdvertisements() async throws -> [AdvertisementModel] {
         return [
             AdvertisementModel(id: "1", title: "Ad 1", price: "100", location: "Location 1", imageUrl: "url1", createdDate: "date1"),
@@ -17,6 +19,7 @@ class MockNetworkManager: NetworkFetchable {
         ]
     }
 
+    // Mock fetchAdvertisementDetail(for:) to return a predefined advertisement detail
     func fetchAdvertisementDetail(for id: String) async throws -> AdvertisementDetailModel {
         return AdvertisementDetailModel(id: "1", title: "Ad 1", price: "100", location: "Location 1", image_url: "url1", created_date: "date1", description: "Description", email: "email@email.com", phone_number: "123456789", address: "Address 1")
     }
