@@ -108,9 +108,6 @@ class ProductListViewController: UIViewController {
             productListView.collectionView.reloadData()
         }
     }
-    
-    
-    
 }
 
 // MARK: - UICollectionViewDelegate & Data Source

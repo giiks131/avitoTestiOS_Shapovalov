@@ -27,20 +27,20 @@ class ProductDetailViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-           super.viewDidLoad()
+        super.viewDidLoad()
 
-           setupNavigationBar()
-           setupRetryButton()
-           setupLoadingView()
-           fetchData()
-       }
+        setupNavigationBar()
+        setupRetryButton()
+        setupLoadingView()
+        fetchData()
+    }
 
     // MARK: - UI Setup
     private func setupNavigationBar() {
-           let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
-           navigationItem.leftBarButtonItem = backButton
-           self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-       }
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    }
     
     private func setupRetryButton() {
         loadingView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
@@ -79,27 +79,27 @@ class ProductDetailViewController: UIViewController {
                     self.viewState = .content
                 }
             } catch {
-                        DispatchQueue.main.async {
-                            // Handle different types of errors.
-                            if let networkError = error as? NetworkError {
-                                // Handle specific network errors here. For future implementations
-                            }
-                            self.viewState = .error(error)
-                        }
+                DispatchQueue.main.async {
+                    // Handle different types of errors.
+                    if let networkError = error as? NetworkError {
+                        // Handle specific network errors here. For future implementations
                     }
+                    self.viewState = .error(error)
                 }
             }
+        }
+    }
 
     // MARK: - UI Configuration
     private func configureUI(with model: AdvertisementDetailModel) {
-        if let imageUrl = URL(string: model.image_url) {
+        if let imageUrl = URL(string: model.imageUrl) {
             productDetailView.productImageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder")) {
                 self.productDetailView.titleLabel.text = model.title
                 self.productDetailView.priceLabel.text = model.price
                 self.productDetailView.locationLabel.text = model.location
                 self.productDetailView.descriptionText.text = model.description
                 self.productDetailView.emailLabel.text = model.email
-                self.productDetailView.phoneNumberLabel.text = model.phone_number
+                self.productDetailView.phoneNumberLabel.text = model.phoneNumber
                 self.productDetailView.addressLabel.text = model.address
             }
         }
@@ -124,7 +124,5 @@ class ProductDetailViewController: UIViewController {
     private func setProductDetailViewAlpha(to alpha: CGFloat) {
         productDetailView.scrollView.alpha = alpha
     }
-
-    
 }
 

@@ -9,7 +9,7 @@ import UIKit
 
 // Custom UIView containing a UICollectionView for displaying Product List
 class ProductListView: UIView {
-
+    
     // UI Elements
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -21,19 +21,19 @@ class ProductListView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-
+    
     // Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(collectionView)
         setupConstraints()
     }
-
+    
     // Required init
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // Setup Constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([

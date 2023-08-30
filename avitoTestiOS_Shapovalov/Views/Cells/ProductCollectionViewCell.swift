@@ -94,20 +94,20 @@ class ProductCollectionViewCell: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
-
+            
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-
+            
             priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             priceLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             priceLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-
+            
             locationLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 8),
             locationLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
             locationLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
             locationLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 18),
-
+            
             dateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 0),
             dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
             dateLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
