@@ -18,6 +18,7 @@ class LoadingView: UIView {
         label.text = "An error occurred"
         label.isHidden = true
         label.textColor = .red
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
