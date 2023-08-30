@@ -7,7 +7,6 @@
 
 import Foundation
 
-// DateFormatterUtility.swift
 class DateFormatterUtility {
     static func formatDate(from originalString: String, fromFormat: String, toFormat: String) -> String? {
         let dateFormatter = DateFormatter()

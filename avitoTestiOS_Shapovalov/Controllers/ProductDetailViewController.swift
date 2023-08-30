@@ -82,9 +82,21 @@ class ProductDetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     // Handle different types of errors.
                     if let networkError = error as? NetworkError {
-                        // Handle specific network errors here. For future implementations
+                        switch networkError {
+                        case .badURL:
+                            // Handle bad URL error
+                            self.viewState = .error(NetworkError.badURL)
+                        case .noData:
+                            // Handle no data error
+                            self.viewState = .error(NetworkError.noData)
+                        case .decodingError:
+                            // Handle JSON decoding error
+                            self.viewState = .error(NetworkError.decodingError)
+                        }
+                    } else {
+                        // Handle other general errors
+                        self.viewState = .error(error)
                     }
-                    self.viewState = .error(error)
                 }
             }
         }
