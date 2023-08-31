@@ -30,7 +30,8 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     
     /// Starts the coordinator's flow by pushing the initial view controller.
     func start() {
-        let vc = ProductListViewController()
+        let productListViewModel = ProductListViewModel(advertisementService: ServiceLocator.shared.advertisementService)
+        let vc = ProductListViewController(viewModel: productListViewModel)
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
@@ -38,11 +39,12 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     /// Navigates to the product detail screen.
     /// - Parameter id: The ID of the product to be displayed.
     func navigateToProductDetail(with id: String) {
-        let detailVC = ProductDetailViewController()
-        detailVC.advertisementId = id
+        let productDetailViewModel = ProductDetailViewModel(detailService: ServiceLocator.shared.detailService, advertisementId: id)
+        let detailVC = ProductDetailViewController(viewModel: productDetailViewModel)
         detailVC.coordinator = self
         navigationController.pushViewController(detailVC, animated: true)
     }
+    
 }
 
 // MARK: - Coordinator Protocol
