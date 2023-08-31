@@ -17,7 +17,8 @@
 		F2AB11412AA100F0008D9B67 /* MockDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11402AA100F0008D9B67 /* MockDetailService.swift */; };
 		F2AB11432AA10116008D9B67 /* AdvertisementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11422AA10116008D9B67 /* AdvertisementServiceTests.swift */; };
 		F2AB11452AA1011C008D9B67 /* DetailServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11442AA1011C008D9B67 /* DetailServiceTests.swift */; };
-		F2AB114F2AA110D6008D9B67 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB114D2AA110D3008D9B67 /* MockNetworkManager.swift */; };
+		F2AB11482AA10498008D9B67 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11472AA10498008D9B67 /* ProductListViewModel.swift */; };
+		F2AB114A2AA1049D008D9B67 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11492AA1049D008D9B67 /* ProductDetailViewModel.swift */; };
 		F2E93AF62A9BD07E00202208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF52A9BD07E00202208 /* AppDelegate.swift */; };
 		F2E93AF82A9BD07E00202208 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */; };
 		F2E93AFA2A9BD07E00202208 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF92A9BD07E00202208 /* ViewController.swift */; };
@@ -58,7 +59,8 @@
 		F2AB11402AA100F0008D9B67 /* MockDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailService.swift; sourceTree = "<group>"; };
 		F2AB11422AA10116008D9B67 /* AdvertisementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementServiceTests.swift; sourceTree = "<group>"; };
 		F2AB11442AA1011C008D9B67 /* DetailServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailServiceTests.swift; sourceTree = "<group>"; };
-		F2AB114D2AA110D3008D9B67 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
+		F2AB11472AA10498008D9B67 /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
+		F2AB11492AA1049D008D9B67 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		F2E93AF22A9BD07E00202208 /* avitoTestiOS_Shapovalov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = avitoTestiOS_Shapovalov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E93AF52A9BD07E00202208 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,11 +102,8 @@
 		F2AB11282A9E76E9008D9B67 /* avitoTestiOS_ShapovalovTests */ = {
 			isa = PBXGroup;
 			children = (
-				F2AB11422AA10116008D9B67 /* AdvertisementServiceTests.swift */,
-				F2AB11442AA1011C008D9B67 /* DetailServiceTests.swift */,
-				F2AB113E2AA100EA008D9B67 /* MockAdvertisementService.swift */,
-				F2AB11402AA100F0008D9B67 /* MockDetailService.swift */,
-				F2AB114D2AA110D3008D9B67 /* MockNetworkManager.swift */,
+				F2AB114B2AA104A7008D9B67 /* TestCases */,
+				F2AB114C2AA104AF008D9B67 /* Mocks */,
 			);
 			path = avitoTestiOS_ShapovalovTests;
 			sourceTree = "<group>";
@@ -125,6 +124,33 @@
 				F2AB113C2AA0FC11008D9B67 /* ServiceLocator.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F2AB11462AA10489008D9B67 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F2AB11472AA10498008D9B67 /* ProductListViewModel.swift */,
+				F2AB11492AA1049D008D9B67 /* ProductDetailViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F2AB114B2AA104A7008D9B67 /* TestCases */ = {
+			isa = PBXGroup;
+			children = (
+				F2AB11422AA10116008D9B67 /* AdvertisementServiceTests.swift */,
+				F2AB11442AA1011C008D9B67 /* DetailServiceTests.swift */,
+			);
+			path = TestCases;
+			sourceTree = "<group>";
+		};
+		F2AB114C2AA104AF008D9B67 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				F2AB113E2AA100EA008D9B67 /* MockAdvertisementService.swift */,
+				F2AB11402AA100F0008D9B67 /* MockDetailService.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		F2E93AE92A9BD07E00202208 = {
@@ -158,6 +184,7 @@
 				F2E93B0A2A9BD27C00202208 /* Models */,
 				F2E93B0C2A9BD28700202208 /* Views */,
 				F2E93B0D2A9BD28C00202208 /* Controllers */,
+				F2AB11462AA10489008D9B67 /* ViewModels */,
 				F2E93B0E2A9BD29500202208 /* Networking */,
 				F2AB11372AA0FBE1008D9B67 /* Services */,
 				F2E93B0F2A9BD29B00202208 /* Enums */,
@@ -354,6 +381,7 @@
 				F2E93AFA2A9BD07E00202208 /* ViewController.swift in Sources */,
 				F2E93B262A9BD38000202208 /* ProductListViewController.swift in Sources */,
 				F2E93B2B2A9BD97100202208 /* ProductCollectionViewCell.swift in Sources */,
+				F2AB114A2AA1049D008D9B67 /* ProductDetailViewModel.swift in Sources */,
 				F2E93B222A9BD35800202208 /* ViewState.swift in Sources */,
 				F2AB11222A9E693D008D9B67 /* LoadingView.swift in Sources */,
 				F2AB11392AA0FBEE008D9B67 /* AdvertisementService.swift in Sources */,
@@ -366,6 +394,7 @@
 				F2E93B162A9BD2FD00202208 /* AdvertisementDetailModel.swift in Sources */,
 				F2E93B142A9BD2F000202208 /* AdvertisementModel.swift in Sources */,
 				F2AB113D2AA0FC11008D9B67 /* ServiceLocator.swift in Sources */,
+				F2AB11482AA10498008D9B67 /* ProductListViewModel.swift in Sources */,
 				F2E93B282A9BD39000202208 /* ProductDetailViewController.swift in Sources */,
 				F2E93AF62A9BD07E00202208 /* AppDelegate.swift in Sources */,
 				F2E93AF82A9BD07E00202208 /* SceneDelegate.swift in Sources */,
