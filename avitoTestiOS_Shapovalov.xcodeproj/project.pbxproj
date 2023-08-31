@@ -368,6 +368,7 @@
 				F2AB11412AA100F0008D9B67 /* MockDetailService.swift in Sources */,
 				F2AB11452AA1011C008D9B67 /* DetailServiceTests.swift in Sources */,
 				F2AB113F2AA100EA008D9B67 /* MockAdvertisementService.swift in Sources */,
+				F2AB114F2AA110D6008D9B67 /* MockNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
