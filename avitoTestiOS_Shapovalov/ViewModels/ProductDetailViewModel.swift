@@ -10,9 +10,9 @@ import Foundation
 class ProductDetailViewModel {
     private var detailService: DetailService
     private(set) var advertisementDetail: AdvertisementDetailModel?
-
+    
     var advertisementId: String
-
+    
     var viewState: ViewState = .loading {
         didSet {
             DispatchQueue.main.async {
@@ -20,14 +20,14 @@ class ProductDetailViewModel {
             }
         }
     }
-
+    
     var updateUIHandler: (() -> Void)?
-
+    
     init(detailService: DetailService, advertisementId: String) {
         self.detailService = detailService
         self.advertisementId = advertisementId
     }
-
+    
     func fetchData() {
         viewState = .loading
         Task {

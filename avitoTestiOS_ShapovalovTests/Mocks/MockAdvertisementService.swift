@@ -11,12 +11,12 @@ import Foundation
 class MockAdvertisementService: AdvertisementFetchable {
     var shouldReturnError: Bool
     var mockAdvertisements: [AdvertisementModel]
-
+    
     init(shouldReturnError: Bool = false, mockAdvertisements: [AdvertisementModel] = []) {
         self.shouldReturnError = shouldReturnError
         self.mockAdvertisements = mockAdvertisements
     }
-
+    
     func fetchAdvertisements() async throws -> [AdvertisementModel] {
         if shouldReturnError {
             throw NetworkError.noData

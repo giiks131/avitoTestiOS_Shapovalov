@@ -9,7 +9,7 @@ import Foundation
 
 struct AdvertisementService: AdvertisementFetchable {
     private let networkManager = NetworkManager()
-
+    
     func fetchAdvertisements() async throws -> [AdvertisementModel] {
         let endpoint = "/main-page.json"
         let root: AdvertisementRoot = try await networkManager.fetchData(from: endpoint)

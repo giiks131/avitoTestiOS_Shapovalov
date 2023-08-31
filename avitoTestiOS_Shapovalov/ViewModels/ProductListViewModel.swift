@@ -8,10 +8,10 @@
 import Foundation
 
 class ProductListViewModel {
-
+    
     private var advertisementService: AdvertisementService
     private(set) var advertisements: [AdvertisementModel] = []
-
+    
     var viewState: ViewState = .loading {
         didSet {
             DispatchQueue.main.async {
@@ -19,13 +19,13 @@ class ProductListViewModel {
             }
         }
     }
-
+    
     var updateUIHandler: (() -> Void)?
-
+    
     init(advertisementService: AdvertisementService) {
         self.advertisementService = advertisementService
     }
-
+    
     func fetchData() {
         viewState = .loading
         Task {

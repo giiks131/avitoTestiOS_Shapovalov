@@ -8,44 +8,44 @@
 import UIKit
 
 class ProductDetailViewController: UIViewController {
-
+    
     var coordinator: MainCoordinator?
     private let productDetailView = ProductDetailView()
     private var loadingView = LoadingView()
     private let viewModel: ProductDetailViewModel
-
+    
     init(viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func loadView() {
         view = productDetailView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLoadingView()
         setupRetryButton()
-
+        
         viewModel.updateUIHandler = { [weak self] in
             self?.updateUI()
         }
         viewModel.fetchData()
     }
-
+    
     private func setupRetryButton() {
         loadingView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
     }
-
+    
     @objc private func retryFetchingData() {
         viewModel.fetchData()
     }
-
+    
     private func setupLoadingView() {
         view.addSubview(loadingView)
         loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,9 +56,9 @@ class ProductDetailViewController: UIViewController {
             loadingView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-
+    
     // MARK: - UI Update
-
+    
     private func updateUI() {
         switch viewModel.viewState {
         case .loading:
@@ -77,11 +77,11 @@ class ProductDetailViewController: UIViewController {
             }
         }
     }
-
+    
     private func setProductDetailViewAlpha(to alpha: CGFloat) {
         productDetailView.scrollView.alpha = alpha
     }
-
+    
     private func configureUI(with model: AdvertisementDetailModel) {
         if let imageUrl = URL(string: model.imageUrl) {
             productDetailView.productImageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder")) {
@@ -92,7 +92,7 @@ class ProductDetailViewController: UIViewController {
                 self.productDetailView.emailLabel.text = model.email
                 self.productDetailView.phoneNumberLabel.text = model.phoneNumber
                 self.productDetailView.addressLabel.text = model.address
-
+                
                 if let formattedDate = DateFormatterUtility.formatDate(from: model.createdDate, fromFormat: "yyyy-MM-dd", toFormat: "dd MMMM yyyy") {
                     self.productDetailView.createdDateLabel.text = formattedDate
                 }
