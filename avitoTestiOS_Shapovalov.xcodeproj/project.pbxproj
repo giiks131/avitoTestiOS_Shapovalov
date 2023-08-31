@@ -21,7 +21,6 @@
 		F2AB114A2AA1049D008D9B67 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11492AA1049D008D9B67 /* ProductDetailViewModel.swift */; };
 		F2E93AF62A9BD07E00202208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF52A9BD07E00202208 /* AppDelegate.swift */; };
 		F2E93AF82A9BD07E00202208 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */; };
-		F2E93AFA2A9BD07E00202208 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF92A9BD07E00202208 /* ViewController.swift */; };
 		F2E93AFF2A9BD08000202208 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E93AFE2A9BD08000202208 /* Assets.xcassets */; };
 		F2E93B022A9BD08000202208 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2E93B002A9BD08000202208 /* LaunchScreen.storyboard */; };
 		F2E93B122A9BD2E200202208 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93B112A9BD2E200202208 /* MainCoordinator.swift */; };
@@ -64,7 +63,6 @@
 		F2E93AF22A9BD07E00202208 /* avitoTestiOS_Shapovalov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = avitoTestiOS_Shapovalov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E93AF52A9BD07E00202208 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F2E93AF92A9BD07E00202208 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F2E93AFE2A9BD08000202208 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2E93B012A9BD08000202208 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2E93B032A9BD08000202208 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 			children = (
 				F2E93AF52A9BD07E00202208 /* AppDelegate.swift */,
 				F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */,
-				F2E93AF92A9BD07E00202208 /* ViewController.swift */,
 				F2E93AFE2A9BD08000202208 /* Assets.xcassets */,
 				F2E93B002A9BD08000202208 /* LaunchScreen.storyboard */,
 				F2E93B032A9BD08000202208 /* Info.plist */,
@@ -378,7 +375,6 @@
 			files = (
 				F2E93B2E2A9D4A4300202208 /* UIImageView+Extensions.swift in Sources */,
 				F2AB11332A9FE616008D9B67 /* NetworkError.swift in Sources */,
-				F2E93AFA2A9BD07E00202208 /* ViewController.swift in Sources */,
 				F2E93B262A9BD38000202208 /* ProductListViewController.swift in Sources */,
 				F2E93B2B2A9BD97100202208 /* ProductCollectionViewCell.swift in Sources */,
 				F2AB114A2AA1049D008D9B67 /* ProductDetailViewModel.swift in Sources */,
