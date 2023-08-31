@@ -7,48 +7,45 @@
 
 import UIKit
 
-// A UIViewController subclass responsible for displaying the details of a single product.
 class ProductDetailViewController: UIViewController {
-    
+
     var coordinator: MainCoordinator?
-    var advertisementId: String?
     private let productDetailView = ProductDetailView()
     private var loadingView = LoadingView()
-    private var detailService: DetailService!
-    
-    // ViewState to handle UI state.
-    private var viewState: ViewState = .loading {
-        didSet {
-            updateUI()
-        }
+    private let viewModel: ProductDetailViewModel
+
+    init(viewModel: ProductDetailViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
-    
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func loadView() {
         view = productDetailView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        detailService = ServiceLocator.shared.detailService
-
-        setupNavigationBar()
-        setupRetryButton()
         setupLoadingView()
-        fetchData()
+        setupRetryButton()
+
+        viewModel.updateUIHandler = { [weak self] in
+            self?.updateUI()
+        }
+        viewModel.fetchData()
     }
 
-    // MARK: - UI Setup
-    private func setupNavigationBar() {
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem = backButton
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-    }
-    
     private func setupRetryButton() {
         loadingView.retryButton.addTarget(self, action: #selector(retryFetchingData), for: .touchUpInside)
     }
-    
+
+    @objc private func retryFetchingData() {
+        viewModel.fetchData()
+    }
+
     private func setupLoadingView() {
         view.addSubview(loadingView)
         loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,37 +57,31 @@ class ProductDetailViewController: UIViewController {
         ])
     }
 
-    // MARK: - Actions
-    @objc func backButtonTapped() {
-        // Perform the navigation back action or dismiss the view controller
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc private func retryFetchingData() {
-        fetchData()
-    }
+    // MARK: - UI Update
 
-    // MARK: - Data Fetching
-    private func fetchData() {
-            guard let id = advertisementId else { return }
-            viewState = .loading
-            Task {
-                do {
-                    let advertisementDetail = try await detailService.fetchAdvertisementDetail(for: id)
-                    DispatchQueue.main.async {
-                        self.configureUI(with: advertisementDetail)
-                        self.viewState = .content
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.viewState = .error(error)
-                    }
-                }
+    private func updateUI() {
+        switch viewModel.viewState {
+        case .loading:
+            setProductDetailViewAlpha(to: 0) // Make ProductDetailView's subviews transparent
+            loadingView.showLoading()
+            view.bringSubviewToFront(loadingView)
+        case .error:
+            setProductDetailViewAlpha(to: 0) // Make ProductDetailView's subviews transparent
+            loadingView.showError()
+            view.bringSubviewToFront(loadingView)
+        case .content:
+            setProductDetailViewAlpha(to: 1) // Make ProductDetailView's subviews opaque
+            loadingView.hide()
+            if let detail = viewModel.advertisementDetail {
+                configureUI(with: detail)
             }
         }
+    }
 
+    private func setProductDetailViewAlpha(to alpha: CGFloat) {
+        productDetailView.scrollView.alpha = alpha
+    }
 
-    // MARK: - UI Configuration
     private func configureUI(with model: AdvertisementDetailModel) {
         if let imageUrl = URL(string: model.imageUrl) {
             productDetailView.productImageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder")) {
@@ -108,25 +99,4 @@ class ProductDetailViewController: UIViewController {
             }
         }
     }
-    
-    private func updateUI() {
-        switch viewState {
-        case .loading:
-            setProductDetailViewAlpha(to: 0) // Make ProductDetailView's subviews transparent
-            loadingView.showLoading()
-            view.bringSubviewToFront(loadingView)
-        case .error:
-            setProductDetailViewAlpha(to: 0) // Make ProductDetailView's subviews transparent
-            loadingView.showError()
-            view.bringSubviewToFront(loadingView)
-        case .content:
-            setProductDetailViewAlpha(to: 1) // Make ProductDetailView's subviews opaque
-            loadingView.hide()
-        }
-    }
-
-    private func setProductDetailViewAlpha(to alpha: CGFloat) {
-        productDetailView.scrollView.alpha = alpha
-    }
 }
-
