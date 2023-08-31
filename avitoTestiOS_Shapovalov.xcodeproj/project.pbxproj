@@ -17,6 +17,7 @@
 		F2AB11412AA100F0008D9B67 /* MockDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11402AA100F0008D9B67 /* MockDetailService.swift */; };
 		F2AB11432AA10116008D9B67 /* AdvertisementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11422AA10116008D9B67 /* AdvertisementServiceTests.swift */; };
 		F2AB11452AA1011C008D9B67 /* DetailServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11442AA1011C008D9B67 /* DetailServiceTests.swift */; };
+		F2AB114F2AA110D6008D9B67 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB114D2AA110D3008D9B67 /* MockNetworkManager.swift */; };
 		F2E93AF62A9BD07E00202208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF52A9BD07E00202208 /* AppDelegate.swift */; };
 		F2E93AF82A9BD07E00202208 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */; };
 		F2E93AFA2A9BD07E00202208 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF92A9BD07E00202208 /* ViewController.swift */; };
@@ -57,6 +58,7 @@
 		F2AB11402AA100F0008D9B67 /* MockDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailService.swift; sourceTree = "<group>"; };
 		F2AB11422AA10116008D9B67 /* AdvertisementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementServiceTests.swift; sourceTree = "<group>"; };
 		F2AB11442AA1011C008D9B67 /* DetailServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailServiceTests.swift; sourceTree = "<group>"; };
+		F2AB114D2AA110D3008D9B67 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		F2E93AF22A9BD07E00202208 /* avitoTestiOS_Shapovalov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = avitoTestiOS_Shapovalov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E93AF52A9BD07E00202208 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				F2AB11442AA1011C008D9B67 /* DetailServiceTests.swift */,
 				F2AB113E2AA100EA008D9B67 /* MockAdvertisementService.swift */,
 				F2AB11402AA100F0008D9B67 /* MockDetailService.swift */,
+				F2AB114D2AA110D3008D9B67 /* MockNetworkManager.swift */,
 			);
 			path = avitoTestiOS_ShapovalovTests;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				F2AB11412AA100F0008D9B67 /* MockDetailService.swift in Sources */,
 				F2AB11452AA1011C008D9B67 /* DetailServiceTests.swift in Sources */,
 				F2AB113F2AA100EA008D9B67 /* MockAdvertisementService.swift in Sources */,
+				F2AB114F2AA110D6008D9B67 /* MockNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
