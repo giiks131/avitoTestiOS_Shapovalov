@@ -13,19 +13,15 @@ protocol NetworkFetchable {
     func fetchAdvertisementDetail(for id: String) async throws -> AdvertisementDetailModel
 }
 
-// Singleton class to handle network operations
-class NetworkManager: NetworkFetchable {
+struct NetworkManager {
 
-    // Shared instance for singleton
-    static let shared = NetworkManager()
-
-    // Private initializer to restrict object creation
-    private init() {}
+    // The base URL for API requests
+    static let baseURL = "https://www.avito.st/s/interns-ios"
 
     // Generic function to fetch data from the network
-    func fetchData<T: Decodable>(from urlString: String) async throws -> T {
-        // Check if the URL is valid
-        guard let url = URL(string: urlString) else {
+    func fetchData<T: Decodable>(from endpoint: String) async throws -> T {
+        // Construct the full URL
+        guard let url = URL(string: NetworkManager.baseURL + endpoint) else {
             throw NetworkError.badURL
         }
 
@@ -39,19 +35,5 @@ class NetworkManager: NetworkFetchable {
         } catch {
             throw NetworkError.decodingError
         }
-    }
-
-    // Fetch a list of advertisements
-    func fetchAdvertisements() async throws -> [AdvertisementModel] {
-        let urlString = "https://www.avito.st/s/interns-ios/main-page.json"
-        let root: AdvertisementRoot = try await fetchData(from: urlString)
-        return root.advertisements
-    }
-
-    // Fetch details for a single advertisement
-    func fetchAdvertisementDetail(for id: String) async throws -> AdvertisementDetailModel {
-        let urlString = "https://www.avito.st/s/interns-ios/details/\(id).json"
-        let detail: AdvertisementDetailModel = try await fetchData(from: urlString)
-        return detail
     }
 }
