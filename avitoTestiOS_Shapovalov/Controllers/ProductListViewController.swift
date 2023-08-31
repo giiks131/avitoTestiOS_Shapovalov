@@ -12,10 +12,9 @@ class ProductListViewController: UIViewController {
     var coordinator: MainCoordinator?
     private var advertisements: [AdvertisementModel] = []
     private let productListView = ProductListView()
-    
     private var loadingView = LoadingView()
-    
     private let refreshControl = UIRefreshControl()
+    private var advertisementService: AdvertisementService!
     
     // Property to manage UI states
     private var viewState: ViewState = .loading {
@@ -31,6 +30,7 @@ class ProductListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Advertisements"
+        advertisementService = ServiceLocator.shared.advertisementService
         
         setupLoadingView()
         setupRetryButton()
@@ -76,22 +76,22 @@ class ProductListViewController: UIViewController {
     }
     
     private func fetchData(completion: ((Bool) -> Void)? = nil) {
-        viewState = .loading
-        Task {
-            do {
-                self.advertisements = try await NetworkManager.shared.fetchAdvertisements()
-                DispatchQueue.main.async {
-                    self.viewState = .content
-                    completion?(true)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    self.viewState = .error(error)
-                    completion?(false)
-                }
-            }
-        }
-    }
+           viewState = .loading
+           Task {
+               do {
+                   self.advertisements = try await advertisementService.fetchAdvertisements()
+                   DispatchQueue.main.async {
+                       self.viewState = .content
+                       completion?(true)
+                   }
+               } catch {
+                   DispatchQueue.main.async {
+                       self.viewState = .error(error)
+                       completion?(false)
+                   }
+               }
+           }
+       }
     
     // MARK: - UI Update
     private func updateUI() {

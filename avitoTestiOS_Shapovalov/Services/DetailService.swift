@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DetailService {
+struct DetailService: DetailFetchable {
 
     private let networkManager = NetworkManager()
 

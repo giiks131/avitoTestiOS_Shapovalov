@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct AdvertisementService {
-
+struct AdvertisementService: AdvertisementFetchable {
     private let networkManager = NetworkManager()
 
     func fetchAdvertisements() async throws -> [AdvertisementModel] {

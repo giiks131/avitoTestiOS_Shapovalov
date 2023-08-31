@@ -7,11 +7,15 @@
 
 import Foundation
 
-// Protocol defining the networking capabilities
-protocol NetworkFetchable {
+// Protocols defining the networking capabilities
+protocol AdvertisementFetchable {
     func fetchAdvertisements() async throws -> [AdvertisementModel]
+}
+
+protocol DetailFetchable {
     func fetchAdvertisementDetail(for id: String) async throws -> AdvertisementDetailModel
 }
+
 
 struct NetworkManager {
 
