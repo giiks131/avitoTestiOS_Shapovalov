@@ -14,6 +14,7 @@ class ProductDetailViewController: UIViewController {
     var advertisementId: String?
     private let productDetailView = ProductDetailView()
     private var loadingView = LoadingView()
+    private var detailService: DetailService!
     
     // ViewState to handle UI state.
     private var viewState: ViewState = .loading {
@@ -28,6 +29,8 @@ class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        detailService = ServiceLocator.shared.detailService
 
         setupNavigationBar()
         setupRetryButton()
@@ -69,26 +72,23 @@ class ProductDetailViewController: UIViewController {
 
     // MARK: - Data Fetching
     private func fetchData() {
-        guard let id = advertisementId else { return }
-        viewState = .loading
-        Task {
-            do {
-                let advertisementDetail = try await NetworkManager.shared.fetchAdvertisementDetail(for: id)
-                DispatchQueue.main.async {
-                    self.configureUI(with: advertisementDetail)
-                    self.viewState = .content
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    // Handle different types of errors.
-                    if let networkError = error as? NetworkError {
-                        // Handle specific network errors here. For future implementations
+            guard let id = advertisementId else { return }
+            viewState = .loading
+            Task {
+                do {
+                    let advertisementDetail = try await detailService.fetchAdvertisementDetail(for: id)
+                    DispatchQueue.main.async {
+                        self.configureUI(with: advertisementDetail)
+                        self.viewState = .content
                     }
-                    self.viewState = .error(error)
+                } catch {
+                    DispatchQueue.main.async {
+                        self.viewState = .error(error)
+                    }
                 }
             }
         }
-    }
+
 
     // MARK: - UI Configuration
     private func configureUI(with model: AdvertisementDetailModel) {
