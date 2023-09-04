@@ -12,6 +12,7 @@ class CacheManager {
     static let shared = CacheManager()
 
     private init() {}
+    
 
     // Key-value storage for the cache
     private var cache: [String: Any] = [:]
