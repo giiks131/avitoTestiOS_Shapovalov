@@ -72,8 +72,13 @@ class ProductListViewController: UIViewController {
     }
     
     @objc private func reloadData() {
-        viewModel.fetchData()
+        viewModel.fetchData { [weak self] in
+            DispatchQueue.main.async {
+                self?.refreshControl.endRefreshing()
+            }
+        }
     }
+
     
     private func updateUI() {
         switch viewModel.viewState {

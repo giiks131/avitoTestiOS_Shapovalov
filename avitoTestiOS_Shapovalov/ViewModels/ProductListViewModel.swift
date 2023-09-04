@@ -26,7 +26,7 @@ class ProductListViewModel {
         self.advertisementService = advertisementService
     }
     
-    func fetchData() {
+    func fetchData(completion: @escaping () -> Void = {}) {
         viewState = .loading
         Task {
             do {
@@ -35,6 +35,7 @@ class ProductListViewModel {
             } catch {
                 self.viewState = .error(error)
             }
+            completion()
         }
     }
 }
