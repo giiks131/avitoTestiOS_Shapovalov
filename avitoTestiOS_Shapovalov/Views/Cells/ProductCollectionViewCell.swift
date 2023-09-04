@@ -123,7 +123,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
                 self.titleLabel.text = model.title
                 self.priceLabel.text = model.price
                 self.locationLabel.text = model.location
-
+                
                 if let formattedDate = DateFormatterUtility.formatDate(from: model.createdDate, fromFormat: "yyyy-MM-dd", toFormat: "dd MMMM yyyy") {
                     self.dateLabel.text = formattedDate
                 }

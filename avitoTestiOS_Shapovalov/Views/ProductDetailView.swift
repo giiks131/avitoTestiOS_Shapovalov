@@ -114,7 +114,7 @@ class ProductDetailView: UIView {
         setupUIElements()
         setupConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

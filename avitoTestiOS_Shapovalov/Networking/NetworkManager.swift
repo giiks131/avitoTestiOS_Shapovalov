@@ -18,20 +18,20 @@ protocol DetailFetchable {
 
 
 struct NetworkManager {
-
+    
     // The base URL for API requests
     static let baseURL = "https://www.avito.st/s/interns-ios"
-
+    
     // Generic function to fetch data from the network
     func fetchData<T: Decodable>(from endpoint: String) async throws -> T {
         // Construct the full URL
         guard let url = URL(string: NetworkManager.baseURL + endpoint) else {
             throw NetworkError.badURL
         }
-
+        
         // Perform the data fetching
         let (data, _) = try await URLSession.shared.data(from: url)
-
+        
         // Decode the received data
         do {
             let decodedData = try JSONDecoder().decode(T.self, from: data)
