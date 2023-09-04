@@ -113,7 +113,7 @@ class ProductListViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDelegate & Data Source
-extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.advertisements.count
