@@ -153,7 +153,7 @@ class ProductDetailView: UIView {
             productImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             productImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            productImageView.heightAnchor.constraint(equalToConstant: 300),
+            productImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 9/16),
 
             priceLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 16),
             priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
