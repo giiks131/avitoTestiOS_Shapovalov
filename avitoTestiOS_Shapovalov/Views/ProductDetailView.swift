@@ -147,13 +147,13 @@ class ProductDetailView: UIView {
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            contentView.bottomAnchor.constraint(equalTo: createdDateLabel.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
             productImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             productImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            productImageView.heightAnchor.constraint(equalToConstant: 300),
+            productImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 9/16),
 
             priceLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 16),
             priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -175,12 +175,10 @@ class ProductDetailView: UIView {
             addressLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16),
             addressLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             addressLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            addressLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
 
             descriptionLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 24),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
 
             descriptionText.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -197,6 +195,7 @@ class ProductDetailView: UIView {
             createdDateLabel.topAnchor.constraint(equalTo: phoneNumberLabel.bottomAnchor, constant: 8),
             createdDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             createdDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            createdDateLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16)
             
         ])
     }
