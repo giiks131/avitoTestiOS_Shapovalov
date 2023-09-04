@@ -19,6 +19,7 @@
 		F2AB11452AA1011C008D9B67 /* DetailServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11442AA1011C008D9B67 /* DetailServiceTests.swift */; };
 		F2AB11482AA10498008D9B67 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11472AA10498008D9B67 /* ProductListViewModel.swift */; };
 		F2AB114A2AA1049D008D9B67 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11492AA1049D008D9B67 /* ProductDetailViewModel.swift */; };
+		F2E2A3BE2AA67A2500978698 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2A3BD2AA67A2500978698 /* CacheManager.swift */; };
 		F2E93AF62A9BD07E00202208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF52A9BD07E00202208 /* AppDelegate.swift */; };
 		F2E93AF82A9BD07E00202208 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */; };
 		F2E93AFF2A9BD08000202208 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E93AFE2A9BD08000202208 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		F2AB11442AA1011C008D9B67 /* DetailServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailServiceTests.swift; sourceTree = "<group>"; };
 		F2AB11472AA10498008D9B67 /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 		F2AB11492AA1049D008D9B67 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
+		F2E2A3BD2AA67A2500978698 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		F2E93AF22A9BD07E00202208 /* avitoTestiOS_Shapovalov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = avitoTestiOS_Shapovalov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E93AF52A9BD07E00202208 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2E93AF72A9BD07E00202208 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				F2AB11352A9FE9E8008D9B67 /* DateFormatterUtility.swift */,
+				F2E2A3BD2AA67A2500978698 /* CacheManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -365,7 +368,6 @@
 				F2AB11412AA100F0008D9B67 /* MockDetailService.swift in Sources */,
 				F2AB11452AA1011C008D9B67 /* DetailServiceTests.swift in Sources */,
 				F2AB113F2AA100EA008D9B67 /* MockAdvertisementService.swift in Sources */,
-				F2AB114F2AA110D6008D9B67 /* MockNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +381,7 @@
 				F2E93B2B2A9BD97100202208 /* ProductCollectionViewCell.swift in Sources */,
 				F2AB114A2AA1049D008D9B67 /* ProductDetailViewModel.swift in Sources */,
 				F2E93B222A9BD35800202208 /* ViewState.swift in Sources */,
+				F2E2A3BE2AA67A2500978698 /* CacheManager.swift in Sources */,
 				F2AB11222A9E693D008D9B67 /* LoadingView.swift in Sources */,
 				F2AB11392AA0FBEE008D9B67 /* AdvertisementService.swift in Sources */,
 				F2E93B1A2A9BD30E00202208 /* ProductDetailView.swift in Sources */,
