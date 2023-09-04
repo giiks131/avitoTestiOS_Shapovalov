@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class ProductListViewModel {
 
     private var advertisementService: AdvertisementService
@@ -14,9 +15,7 @@ class ProductListViewModel {
 
     var viewState: ViewState = .loading {
         didSet {
-            DispatchQueue.main.async {
-                self.updateUIHandler?()
-            }
+            self.updateUIHandler?()
         }
     }
 
