@@ -130,9 +130,4 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
         let selectedAdvertisement = viewModel.advertisements[indexPath.row]
         coordinator?.navigateToProductDetail(with: selectedAdvertisement.id)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 8) / 2
-        return CGSize(width: width, height: width * 1.75)
-    }
 }
