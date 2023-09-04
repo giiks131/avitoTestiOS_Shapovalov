@@ -14,7 +14,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     static let identifier = "ProductCollectionViewCell"
     
     // UI Elements
-    lazy var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
@@ -23,7 +23,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         label.numberOfLines = 2
@@ -33,7 +33,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var priceLabel: UILabel = {
+    private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -41,7 +41,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var locationLabel: UILabel = {
+    private lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .gray
@@ -49,7 +49,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .gray

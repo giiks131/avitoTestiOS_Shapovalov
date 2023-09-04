@@ -11,12 +11,9 @@ import UIKit
 class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     
     // MARK: - Properties
-    
-    /// Holds any child coordinators to prevent them from being deallocated.
-    var childCoordinators = [Coordinator]()
-    
+
     /// The UINavigationController to push and pop view controllers.
-    var navigationController: UINavigationController
+    let navigationController: UINavigationController
     
     // MARK: - Initialization
     
@@ -51,12 +48,9 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 
 /// Defines the basic structure and functionalities for a coordinator.
 protocol Coordinator {
-    
-    /// Holds any child coordinators to prevent them from being deallocated.
-    var childCoordinators: [Coordinator] { get set }
-    
+
     /// The UINavigationController to push and pop view controllers.
-    var navigationController: UINavigationController { get set }
+    var navigationController: UINavigationController { get }
     
     /// Starts the coordinator's flow by pushing the initial view controller.
     func start()

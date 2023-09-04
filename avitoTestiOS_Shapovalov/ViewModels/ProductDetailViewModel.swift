@@ -7,40 +7,35 @@
 
 import Foundation
 
+@MainActor
 class ProductDetailViewModel {
     private var detailService: DetailService
     private(set) var advertisementDetail: AdvertisementDetailModel?
-    
+
     var advertisementId: String
-    
+
     var viewState: ViewState = .loading {
         didSet {
-            DispatchQueue.main.async {
-                self.updateUIHandler?()
-            }
+            self.updateUIHandler?()
         }
     }
-    
+
     var updateUIHandler: (() -> Void)?
-    
+
     init(detailService: DetailService, advertisementId: String) {
         self.detailService = detailService
         self.advertisementId = advertisementId
     }
-    
+
     func fetchData() {
         viewState = .loading
         Task {
             do {
                 let detail = try await detailService.fetchAdvertisementDetail(for: advertisementId)
-                DispatchQueue.main.async {
-                    self.advertisementDetail = detail
-                    self.viewState = .content
-                }
+                self.advertisementDetail = detail
+                self.viewState = .content
             } catch {
-                DispatchQueue.main.async {
-                    self.viewState = .error(error)
-                }
+                self.viewState = .error(error)
             }
         }
     }
