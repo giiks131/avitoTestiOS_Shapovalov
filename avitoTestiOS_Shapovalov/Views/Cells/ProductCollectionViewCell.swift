@@ -119,13 +119,12 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
     
     // Configure cell with model
-    func configure(with model: AdvertisementUIModel) {
-        imageView.loadImage(from: model.imageUrl, placeholder: UIImage(named: "placeholder")) {
-            self.titleLabel.text = model.title
-            self.priceLabel.text = model.price
-            self.locationLabel.text = model.location
-            self.dateLabel.text = model.createdDate
-            self.layoutIfNeeded()
-        }
+    func configure(with model: AdvertisementUIModel) async {
+        await imageView.loadImage(from: model.imageUrl, placeholder: UIImage(named: "placeholder"))
+        self.titleLabel.text = model.title
+        self.priceLabel.text = model.price
+        self.locationLabel.text = model.location
+        self.dateLabel.text = model.createdDate
+        self.layoutIfNeeded()
     }
 }

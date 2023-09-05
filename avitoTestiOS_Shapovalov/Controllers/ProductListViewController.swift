@@ -123,9 +123,12 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as! ProductCollectionViewCell
         cell.prepareForReuse()
         let advertisement = viewModel.advertisementUIModels[indexPath.row]
-        cell.configure(with: advertisement)
+        Task {
+            await cell.configure(with: advertisement)
+        }
         return cell
     }
+
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedAdvertisement = viewModel.advertisementUIModels[indexPath.row]
