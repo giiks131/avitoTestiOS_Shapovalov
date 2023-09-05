@@ -9,11 +9,11 @@ import XCTest
 @testable import avitoTestiOS_Shapovalov
 
 final class DetailServiceTests: XCTestCase {
-
+    
     func testFetchAdvertisementDetails() async throws {
         let testDate = Date()
         let mockService = MockDetailService(mockDetail: AdvertisementDetailModel(id: "1", title: "Ad 1", price: "100", location: "Location 1", imageUrl: "url1", createdDate: testDate, description: "Description", email: "email@email.com", phoneNumber: "123456789", address: "Address 1"))
-
+        
         do {
             let advertisementDetail = try await mockService.fetchAdvertisementDetail(for: "1")
             XCTAssertNotNil(advertisementDetail)
