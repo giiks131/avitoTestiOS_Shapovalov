@@ -19,20 +19,25 @@ extension UIImageView {
         }
     }
 
-    func loadImage(from url: URL, placeholder: UIImage? = nil, completion: @escaping () -> Void) {
+    func loadImage(from url: URL, placeholder: UIImage? = nil) async {
         self.image = placeholder
         loadingURL = url
 
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url),
-               let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    if self?.loadingURL == url {
-                        self?.image = image
-                        completion()
-                    }
+        if let cachedImage = CacheManager.shared.getImage(key: url.absoluteString) {
+            self.image = cachedImage
+            return
+        }
+
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let image = UIImage(data: data) {
+                CacheManager.shared.setImage(key: url.absoluteString, image: image)
+                if self.loadingURL == url {
+                    self.image = image
                 }
             }
+        } catch {
+            // Handle error
         }
     }
 }

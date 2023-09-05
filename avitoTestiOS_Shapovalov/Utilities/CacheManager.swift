@@ -10,53 +10,66 @@ import UIKit
 class CacheManager {
 
     static let shared = CacheManager()
-
     private init() {}
-    
 
-    // Key-value storage for the cache
     private var cache: [String: Any] = [:]
+    private let cacheQueue = DispatchQueue(label: "com.avitoTestiOS_Shapovalov.CacheQueue")
 
-    // Function to add items to the cache
     func set<T: Codable>(key: String, value: T) {
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(value) {
-            UserDefaults.standard.set(encoded, forKey: key)
+        cacheQueue.async {
+            let encoder = JSONEncoder()
+            do {
+                let encoded = try encoder.encode(value)
+                UserDefaults.standard.set(encoded, forKey: key)
+            } catch {
+                // Handle error
+            }
         }
     }
 
-    // Function to retrieve items from the cache
     func get<T: Codable>(key: String, type: T.Type) -> T? {
-        if let data = UserDefaults.standard.data(forKey: key),
-           let decoded = try? JSONDecoder().decode(type, from: data) {
-            return decoded
+        return cacheQueue.sync {
+            if let data = UserDefaults.standard.data(forKey: key) {
+                do {
+                    let decoded = try JSONDecoder().decode(type, from: data)
+                    return decoded
+                } catch {
+                    // Handle error
+                    return nil
+                }
+            }
+            return nil
         }
-        return nil
     }
 
-    // Function to remove items from the cache
-    func remove(key: String) {
-        UserDefaults.standard.removeObject(forKey: key)
-    }
-
-    // Function to cache image
     func setImage(key: String, image: UIImage) {
-        if let data = image.pngData() {
-            let url = getDocumentsDirectory().appendingPathComponent(key)
-            try? data.write(to: url)
+        cacheQueue.async {
+            let safeKey = key.replacingOccurrences(of: "/", with: "_")
+            if let data = image.pngData() {
+                let url = self.getDocumentsDirectory().appendingPathComponent(safeKey)
+                do {
+                    try data.write(to: url)
+                } catch {
+                    // Handle error
+                }
+            }
         }
     }
 
-    // Function to retrieve cached image
     func getImage(key: String) -> UIImage? {
-        let url = getDocumentsDirectory().appendingPathComponent(key)
-        if let data = try? Data(contentsOf: url) {
-            return UIImage(data: data)
+        return cacheQueue.sync {
+            let safeKey = key.replacingOccurrences(of: "/", with: "_")
+            let url = self.getDocumentsDirectory().appendingPathComponent(safeKey)
+            do {
+                let data = try Data(contentsOf: url)
+                return UIImage(data: data)
+            } catch {
+                // Handle error
+                return nil
+            }
         }
-        return nil
     }
 
-    // Helper function to get the documents directory
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
