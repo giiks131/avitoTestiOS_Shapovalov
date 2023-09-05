@@ -66,25 +66,25 @@ class ProductListViewController: UIViewController {
         productListView.collectionView.delegate = self
         productListView.collectionView.dataSource = self
         productListView.collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
-        
+
         let layout = createCompositionalLayout()
         productListView.collectionView.collectionViewLayout = layout
-        
+
         refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
         productListView.collectionView.refreshControl = refreshControl
     }
-    
+
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(350))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
+
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         section.interGroupSpacing = 10
-        
+
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
@@ -94,7 +94,7 @@ class ProductListViewController: UIViewController {
             self?.refreshControl.endRefreshing()
         }
     }
-    
+
     
     private func updateUI() {
         switch viewModel.viewState {
@@ -114,11 +114,11 @@ class ProductListViewController: UIViewController {
 
 // MARK: - UICollectionViewDelegate & Data Source
 extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.advertisementUIModels.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as! ProductCollectionViewCell
         cell.prepareForReuse()
@@ -128,8 +128,8 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
         }
         return cell
     }
-    
-    
+
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedAdvertisement = viewModel.advertisementUIModels[indexPath.row]
         coordinator?.navigateToProductDetail(with: selectedAdvertisement.id)
