@@ -11,6 +11,7 @@ import Foundation
 class ProductDetailViewModel {
     private var detailService: DetailService
     private(set) var advertisementDetail: AdvertisementDetailModel?
+    private(set) var advertisementDetailUIModel: AdvertisementDetailUIModel?
     
     var advertisementId: String
     

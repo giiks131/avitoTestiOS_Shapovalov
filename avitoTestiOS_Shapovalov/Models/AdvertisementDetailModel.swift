@@ -27,3 +27,17 @@ struct AdvertisementDetailModel: Codable {
         case phoneNumber = "phone_number"
     }
 }
+
+// UI model representing the details of an advertisement for the detail view
+struct AdvertisementDetailUIModel {
+    let id: String          // Unique identifier for the advertisement
+    let title: String       // Title of the advertisement
+    let price: String       // Price of the item being advertised
+    let location: String    // Location where the item is being sold
+    let imageUrl: URL       // URL of the image of the item
+    let createdDate: String // Formatted (optional) date when the advertisement was created
+    let description: String // Detailed description of the item
+    let email: String       // Email address for contacting the seller
+    let phoneNumber: String // Phone number for contacting the seller
+    let address: String     // Physical address where the item can be found
+}

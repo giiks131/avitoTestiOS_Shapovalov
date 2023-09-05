@@ -27,3 +27,13 @@ struct AdvertisementModel: Codable {
 struct AdvertisementRoot: Codable {
     let advertisements: [AdvertisementModel] // Array of advertisements
 }
+
+// UI model representing a summary of an advertisement for the list view
+struct AdvertisementUIModel {
+    let id: String          // Unique identifier for the advertisement
+    let title: String       // Title of the advertisement
+    let price: String       // Price of the item being advertised
+    let location: String    // Location where the item is being sold
+    let imageUrl: URL       // URL of the image of the item
+    let createdDate: String // Formatted (optional) date when the advertisement was created
+}

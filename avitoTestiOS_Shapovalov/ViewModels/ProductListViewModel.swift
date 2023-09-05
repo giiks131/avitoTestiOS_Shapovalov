@@ -12,6 +12,7 @@ class ProductListViewModel {
 
     private var advertisementService: AdvertisementService
     private(set) var advertisements: [AdvertisementModel] = []
+    private(set) var advertisementUIModels: [AdvertisementUIModel] = []
 
     var viewState: ViewState = .loading {
         didSet {
