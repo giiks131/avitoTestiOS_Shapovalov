@@ -27,6 +27,7 @@ struct NetworkManager {
     /// - Parameter endpoint: The specific API endpoint for the data request.
     /// - Returns: A generic value conforming to Decodable protocol.
     /// - Throws: An error if any occur during the process.
+
     func fetchData<T: Decodable>(from endpoint: String) async throws -> T {
         
         /// Construct the full URL from the given endpoint.

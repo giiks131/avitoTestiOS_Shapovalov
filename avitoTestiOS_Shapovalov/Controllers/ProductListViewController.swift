@@ -91,8 +91,8 @@ class ProductListViewController: UIViewController {
     
     @objc private func reloadData() {
         viewModel.fetchData { [weak self] in
-                self?.refreshControl.endRefreshing()
-            }
+            self?.refreshControl.endRefreshing()
+        }
     }
 
     
