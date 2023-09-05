@@ -63,18 +63,20 @@ class ProductDetailViewController: UIViewController {
     private func updateUI() {
         switch viewModel.viewState {
         case .loading:
-            setProductDetailViewAlpha(to: 0) // Make ProductDetailView's subviews transparent
+            setProductDetailViewAlpha(to: 0)
             loadingView.showLoading()
             view.bringSubviewToFront(loadingView)
         case .error:
-            setProductDetailViewAlpha(to: 0) // Make ProductDetailView's subviews transparent
+            setProductDetailViewAlpha(to: 0)
             loadingView.showError()
             view.bringSubviewToFront(loadingView)
         case .content:
-            setProductDetailViewAlpha(to: 1) // Make ProductDetailView's subviews opaque
+            setProductDetailViewAlpha(to: 1)
             loadingView.hide()
-            if let detail = viewModel.advertisementDetail {
-                configureUI(with: detail)
+            if let detail = viewModel.advertisementDetailUIModel {
+                Task {
+                    await configureUI(with: detail)
+                }
             }
         }
     }
@@ -83,24 +85,15 @@ class ProductDetailViewController: UIViewController {
         productDetailView.scrollView.alpha = alpha
     }
     
-    private func configureUI(with model: AdvertisementDetailModel) {
-        if let imageUrl = URL(string: model.imageUrl) {
-            productDetailView.productImageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder")) {
-                self.productDetailView.titleLabel.text = model.title
-                self.productDetailView.priceLabel.text = model.price
-                self.productDetailView.locationLabel.text = model.location
-                self.productDetailView.descriptionText.text = model.description
-                self.productDetailView.emailLabel.text = model.email
-                self.productDetailView.phoneNumberLabel.text = model.phoneNumber
-                self.productDetailView.addressLabel.text = model.address
-                
-                // Use the already decoded Date object
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd MMMM yyyy"
-                if let date = model.createdDate {
-                    self.productDetailView.createdDateLabel.text = dateFormatter.string(from: date)
-                }
-            }
-        }
+    private func configureUI(with model: AdvertisementDetailUIModel) async {
+        await productDetailView.productImageView.loadImage(from: model.imageUrl, placeholder: UIImage(named: "placeholder"))
+        self.productDetailView.titleLabel.text = model.title
+        self.productDetailView.priceLabel.text = model.price
+        self.productDetailView.locationLabel.text = model.location
+        self.productDetailView.descriptionText.text = model.description
+        self.productDetailView.emailLabel.text = model.email
+        self.productDetailView.phoneNumberLabel.text = model.phoneNumber
+        self.productDetailView.addressLabel.text = model.address
+        self.productDetailView.createdDateLabel.text = model.createdDate
     }
 }

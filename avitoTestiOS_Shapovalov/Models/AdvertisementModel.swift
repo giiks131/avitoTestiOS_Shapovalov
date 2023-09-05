@@ -27,3 +27,28 @@ struct AdvertisementModel: Codable {
 struct AdvertisementRoot: Codable {
     let advertisements: [AdvertisementModel] // Array of advertisements
 }
+
+// UI model representing a summary of an advertisement for the list view
+struct AdvertisementUIModel {
+    let id: String
+    let title: String
+    let price: String
+    let location: String
+    let imageUrl: URL
+    let createdDate: String
+
+    static let dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "dd MMMM yyyy"
+        return df
+    }()
+
+    init(from model: AdvertisementModel) {
+        self.id = model.id
+        self.title = model.title
+        self.price = model.price
+        self.location = model.location
+        self.imageUrl = URL(string: model.imageUrl) ?? URL(string: "https://example.com/placeholder")!
+        self.createdDate = model.createdDate.map { Self.dateFormatter.string(from: $0) } ?? ""
+    }
+}
