@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F2AB11222A9E693D008D9B67 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11212A9E693D008D9B67 /* LoadingView.swift */; };
 		F2AB11332A9FE616008D9B67 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11322A9FE616008D9B67 /* NetworkError.swift */; };
-		F2AB11362A9FE9E8008D9B67 /* DateFormatterUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11352A9FE9E8008D9B67 /* DateFormatterUtility.swift */; };
 		F2AB11392AA0FBEE008D9B67 /* AdvertisementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB11382AA0FBEE008D9B67 /* AdvertisementService.swift */; };
 		F2AB113B2AA0FBFA008D9B67 /* DetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB113A2AA0FBFA008D9B67 /* DetailService.swift */; };
 		F2AB113D2AA0FC11008D9B67 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB113C2AA0FC11008D9B67 /* ServiceLocator.swift */; };
@@ -51,7 +50,6 @@
 		F2AB11212A9E693D008D9B67 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		F2AB11272A9E76E9008D9B67 /* avitoTestiOS_ShapovalovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avitoTestiOS_ShapovalovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2AB11322A9FE616008D9B67 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		F2AB11352A9FE9E8008D9B67 /* DateFormatterUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterUtility.swift; sourceTree = "<group>"; };
 		F2AB11382AA0FBEE008D9B67 /* AdvertisementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementService.swift; sourceTree = "<group>"; };
 		F2AB113A2AA0FBFA008D9B67 /* DetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailService.swift; sourceTree = "<group>"; };
 		F2AB113C2AA0FC11008D9B67 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 		F2AB11342A9FE9D9008D9B67 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				F2AB11352A9FE9E8008D9B67 /* DateFormatterUtility.swift */,
 				F2E2A3BD2AA67A2500978698 /* CacheManager.swift */,
 			);
 			path = Utilities;
@@ -388,7 +385,6 @@
 				F2AB113B2AA0FBFA008D9B67 /* DetailService.swift in Sources */,
 				F2E93B122A9BD2E200202208 /* MainCoordinator.swift in Sources */,
 				F2E93B202A9BD34900202208 /* NetworkManager.swift in Sources */,
-				F2AB11362A9FE9E8008D9B67 /* DateFormatterUtility.swift in Sources */,
 				F2E93B182A9BD30900202208 /* ProductListView.swift in Sources */,
 				F2E93B162A9BD2FD00202208 /* AdvertisementDetailModel.swift in Sources */,
 				F2E93B142A9BD2F000202208 /* AdvertisementModel.swift in Sources */,
