@@ -8,13 +8,13 @@
 import UIKit
 
 class CacheManager {
-
+    
     static let shared = CacheManager()
     private init() {}
-
+    
     private var cache: [String: Any] = [:]
     private let cacheQueue = DispatchQueue(label: "com.avitoTestiOS_Shapovalov.CacheQueue")
-
+    
     func set<T: Codable>(key: String, value: T) {
         cacheQueue.async {
             let encoder = JSONEncoder()
@@ -26,7 +26,7 @@ class CacheManager {
             }
         }
     }
-
+    
     func get<T: Codable>(key: String, type: T.Type) -> T? {
         return cacheQueue.sync {
             if let data = UserDefaults.standard.data(forKey: key) {
@@ -41,7 +41,7 @@ class CacheManager {
             return nil
         }
     }
-
+    
     func setImage(key: String, image: UIImage) {
         cacheQueue.async {
             let safeKey = key.replacingOccurrences(of: "/", with: "_")
@@ -55,7 +55,7 @@ class CacheManager {
             }
         }
     }
-
+    
     func getImage(key: String) -> UIImage? {
         return cacheQueue.sync {
             let safeKey = key.replacingOccurrences(of: "/", with: "_")
@@ -69,7 +69,7 @@ class CacheManager {
             }
         }
     }
-
+    
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]

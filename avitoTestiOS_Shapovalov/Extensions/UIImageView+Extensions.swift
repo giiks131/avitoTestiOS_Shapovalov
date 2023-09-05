@@ -18,16 +18,16 @@ extension UIImageView {
             objc_setAssociatedObject(self, &imageLoadingUrl, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-
+    
     func loadImage(from url: URL, placeholder: UIImage? = nil) async {
         self.image = placeholder
         loadingURL = url
-
+        
         if let cachedImage = CacheManager.shared.getImage(key: url.absoluteString) {
             self.image = cachedImage
             return
         }
-
+        
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             if let image = UIImage(data: data) {
