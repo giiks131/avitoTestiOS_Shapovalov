@@ -114,18 +114,19 @@ class ProductListViewController: UIViewController {
 
 // MARK: - UICollectionViewDelegate & Data Source
 extension ProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.advertisements.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as! ProductCollectionViewCell
+        cell.prepareForReuse()
         let advertisement = viewModel.advertisements[indexPath.row]
         cell.configure(with: advertisement)
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedAdvertisement = viewModel.advertisements[indexPath.row]
         coordinator?.navigateToProductDetail(with: selectedAdvertisement.id)

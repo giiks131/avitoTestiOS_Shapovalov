@@ -94,8 +94,11 @@ class ProductDetailViewController: UIViewController {
                 self.productDetailView.phoneNumberLabel.text = model.phoneNumber
                 self.productDetailView.addressLabel.text = model.address
                 
-                if let formattedDate = DateFormatterUtility.formatDate(from: model.createdDate, fromFormat: "yyyy-MM-dd", toFormat: "dd MMMM yyyy") {
-                    self.productDetailView.createdDateLabel.text = formattedDate
+                // Use the already decoded Date object
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd MMMM yyyy"
+                if let date = model.createdDate {
+                    self.productDetailView.createdDateLabel.text = dateFormatter.string(from: date)
                 }
             }
         }
