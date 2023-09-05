@@ -14,7 +14,7 @@ struct AdvertisementDetailModel: Codable {
     let price: String       // Price of the item being advertised
     let location: String    // Location where the item is being sold
     let imageUrl: String    // URL of the image of the item
-    let createdDate: String // Date when the advertisement was created
+    let createdDate: Date? // Date when the advertisement was created
     let description: String // Detailed description of the item
     let email: String       // Email address for contacting the seller
     let phoneNumber: String // Phone number for contacting the seller
