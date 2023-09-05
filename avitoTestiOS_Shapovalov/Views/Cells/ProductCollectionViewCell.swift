@@ -119,20 +119,13 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
     
     // Configure cell with model
-    func configure(with model: AdvertisementModel) {
-        if let imageUrl = URL(string: model.imageUrl) {
-            imageView.loadImage(from: imageUrl, placeholder: UIImage(named: "placeholder")) {
-                self.titleLabel.text = model.title
-                self.priceLabel.text = model.price
-                self.locationLabel.text = model.location
-
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd MMMM yyyy"
-                if let date = model.createdDate {
-                    self.dateLabel.text = dateFormatter.string(from: date)
-                }
-                self.layoutIfNeeded()
-            }
+    func configure(with model: AdvertisementUIModel) {
+        imageView.loadImage(from: model.imageUrl, placeholder: UIImage(named: "placeholder")) {
+            self.titleLabel.text = model.title
+            self.priceLabel.text = model.price
+            self.locationLabel.text = model.location
+            self.dateLabel.text = model.createdDate
+            self.layoutIfNeeded()
         }
     }
 }

@@ -30,10 +30,25 @@ struct AdvertisementRoot: Codable {
 
 // UI model representing a summary of an advertisement for the list view
 struct AdvertisementUIModel {
-    let id: String          // Unique identifier for the advertisement
-    let title: String       // Title of the advertisement
-    let price: String       // Price of the item being advertised
-    let location: String    // Location where the item is being sold
-    let imageUrl: URL       // URL of the image of the item
-    let createdDate: String // Formatted (optional) date when the advertisement was created
+    let id: String
+    let title: String
+    let price: String
+    let location: String
+    let imageUrl: URL
+    let createdDate: String
+
+    static let dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "dd MMMM yyyy"
+        return df
+    }()
+
+    init(from model: AdvertisementModel) {
+        self.id = model.id
+        self.title = model.title
+        self.price = model.price
+        self.location = model.location
+        self.imageUrl = URL(string: model.imageUrl) ?? URL(string: "https://example.com/placeholder")!
+        self.createdDate = model.createdDate.map { Self.dateFormatter.string(from: $0) } ?? ""
+    }
 }
