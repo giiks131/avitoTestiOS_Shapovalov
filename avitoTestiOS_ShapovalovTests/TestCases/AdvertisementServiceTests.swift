@@ -11,9 +11,10 @@ import XCTest
 final class AdvertisementServiceTests: XCTestCase {
     
     func testFetchAdvertisements() async throws {
+        let testDate = Date()
         let mockService = MockAdvertisementService(mockAdvertisements: [
-            AdvertisementModel(id: "1", title: "Ad 1", price: "100", location: "Location 1", imageUrl: "url1", createdDate: "date1"),
-            AdvertisementModel(id: "2", title: "Ad 2", price: "200", location: "Location 2", imageUrl: "url2", createdDate: "date2")
+            AdvertisementModel(id: "1", title: "Ad 1", price: "100", location: "Location 1", imageUrl: "url1", createdDate: testDate),
+            AdvertisementModel(id: "2", title: "Ad 2", price: "200", location: "Location 2", imageUrl: "url2", createdDate: testDate)
         ])
         
         do {
