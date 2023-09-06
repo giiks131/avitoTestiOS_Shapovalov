@@ -72,8 +72,15 @@ class LoadingView: UIView {
     }
     
     // Show error state
-    func showError() {
+    func showError(_ error: Error?) {
         activityIndicator.stopAnimating()
+
+        if let networkError = error as? NetworkError {
+            errorLabel.text = networkError.errorDescription
+        } else {
+            errorLabel.text = "An unknown error occurred"
+        }
+
         errorLabel.isHidden = false
         retryButton.isHidden = false
     }

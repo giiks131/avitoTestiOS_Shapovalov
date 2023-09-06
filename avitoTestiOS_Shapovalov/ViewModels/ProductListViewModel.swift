@@ -12,22 +12,22 @@ class ProductListViewModel {
     private var advertisementService: AdvertisementService
     private(set) var advertisements: [AdvertisementModel] = []
     private(set) var advertisementUIModels: [AdvertisementUIModel] = []
-
+    
     var viewState: ViewState = .loading {
         didSet {
             self.updateUIHandler?()
         }
     }
-
+    
     var updateUIHandler: (() -> Void)?
-
+    
     init(advertisementService: AdvertisementService) {
         self.advertisementService = advertisementService
     }
-
+    
     func fetchData(completion: @escaping () -> Void = {}) {
         viewState = .loading
-
+        
         // Try to get data from cache first
         if let cachedData: [AdvertisementModel] = CacheManager.shared.get(key: "AdvertisementsCache", type: [AdvertisementModel].self) {
             self.advertisements = cachedData
@@ -36,22 +36,24 @@ class ProductListViewModel {
             completion()
             return
         }
-
+        
         Task {
             do {
                 self.advertisements = try await advertisementService.fetchAdvertisements()
                 self.transformToUIModels()
                 self.viewState = .content
-
+                
                 // Save data to cache
                 CacheManager.shared.set(key: "AdvertisementsCache", value: self.advertisements)
-            } catch {
+            } catch let error as NetworkError {
                 self.viewState = .error(error)
+            } catch {
+                self.viewState = .error(NetworkError.decodingError)
             }
             completion()
         }
     }
-
+    
     private func transformToUIModels() {
         self.advertisementUIModels = self.advertisements.map { AdvertisementUIModel(from: $0) }
     }
