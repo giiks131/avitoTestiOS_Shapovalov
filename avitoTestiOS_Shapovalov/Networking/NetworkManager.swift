@@ -7,17 +7,21 @@
 
 import Foundation
 
-/// Protocols defining the networking capabilities
+// MARK: - Networking Protocols
+
+/// Protocol to define methods for fetching advertisements.
 protocol AdvertisementFetchable {
     func fetchAdvertisements() async throws -> [AdvertisementModel]
 }
 
+/// Protocol to define methods for fetching advertisement details.
 protocol DetailFetchable {
     func fetchAdvertisementDetail(for id: String) async throws -> AdvertisementDetailModel
 }
 
+// MARK: - NetworkManager
 
-/// A struct responsible for networking operations.
+/// Struct responsible for networking operations.
 struct NetworkManager {
     
     /// The base URL for API requests.
@@ -27,26 +31,15 @@ struct NetworkManager {
     /// - Parameter endpoint: The specific API endpoint for the data request.
     /// - Returns: A generic value conforming to Decodable protocol.
     /// - Throws: An error if any occur during the process.
-
     func fetchData<T: Decodable>(from endpoint: String) async throws -> T {
-        
-        /// Construct the full URL from the given endpoint.
         guard let url = URL(string: NetworkManager.baseURL + endpoint) else {
             throw NetworkError.badURL
         }
-        
-        /// Asynchronously fetch data from the URL.
         let (data, _) = try await URLSession.shared.data(from: url)
-        
-        /// Initialize JSONDecoder instance.
         let decoder = JSONDecoder()
-        
-        /// Set the date decoding strategy using a custom date format.
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
-        
-        /// Attempt to decode the received data.
         do {
             let decodedData = try decoder.decode(T.self, from: data)
             return decodedData
