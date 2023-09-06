@@ -9,9 +9,9 @@ import Foundation
 
 /// A service responsible for fetching advertisement details from a network source.
 struct DetailService: DetailFetchable {
-
+    
     private let networkManager = NetworkManager()
-
+    
     /// Function to asynchronously fetch advertisement details for a given ID.
     /// - Parameter id: The identifier of the advertisement.
     /// - Throws: An error if any occur during the process.

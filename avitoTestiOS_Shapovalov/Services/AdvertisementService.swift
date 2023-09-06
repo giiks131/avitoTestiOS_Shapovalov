@@ -9,9 +9,9 @@ import Foundation
 
 /// A service responsible for fetching advertisements from a network source.
 struct AdvertisementService: AdvertisementFetchable {
-
+    
     private let networkManager = NetworkManager()
-
+    
     /// Function to asynchronously fetch advertisements.
     /// - Throws: An error if any occur during the process.
     /// - Returns: An array of AdvertisementModel instances.
