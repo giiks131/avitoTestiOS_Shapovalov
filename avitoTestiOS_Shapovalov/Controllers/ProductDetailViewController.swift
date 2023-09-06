@@ -66,9 +66,9 @@ class ProductDetailViewController: UIViewController {
             setProductDetailViewAlpha(to: 0)
             loadingView.showLoading()
             view.bringSubviewToFront(loadingView)
-        case .error:
+        case .error(let error):
             setProductDetailViewAlpha(to: 0)
-            loadingView.showError()
+            loadingView.showError(error)
             view.bringSubviewToFront(loadingView)
         case .content:
             setProductDetailViewAlpha(to: 1)
