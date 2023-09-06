@@ -7,12 +7,15 @@
 
 import UIKit
 
-// A custom UIView to handle loading and error states
+/// A custom UIView to handle loading and error states.
 class LoadingView: UIView {
     
-    // UI Elements
+    // MARK: - UI Elements
+    
+    /// UIActivityIndicatorView for showing loading state.
     let activityIndicator = UIActivityIndicatorView(style: .large)
     
+    /// UILabel for displaying error messages.
     let errorLabel: UILabel = {
         let label = UILabel()
         label.text = "An error occurred"
@@ -22,6 +25,7 @@ class LoadingView: UIView {
         return label
     }()
     
+    /// UIButton for retrying failed operations.
     let retryButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Retry", for: .normal)
@@ -30,19 +34,23 @@ class LoadingView: UIView {
         return button
     }()
     
-    // Initialization
+    // MARK: - Initialization
+    
+    /// Initializes the view and sets up its UI.
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUIElements()
         setupConstraints()
     }
     
-    // Required init
+    /// Required initializer, not implemented.
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // Setup UI Elements
+    // MARK: - Setup
+    
+    /// Sets up the UI elements in the view.
     private func setupUIElements() {
         addSubview(activityIndicator)
         addSubview(errorLabel)
@@ -50,7 +58,7 @@ class LoadingView: UIView {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    // Setup Constraints
+    /// Sets up the constraints for the UI elements.
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -64,21 +72,29 @@ class LoadingView: UIView {
         ])
     }
     
-    // Show loading state
+    // MARK: - UI Update Methods
+    
+    /// Displays the loading indicator and hides error messages and retry button.
     func showLoading() {
         activityIndicator.startAnimating()
         errorLabel.isHidden = true
         retryButton.isHidden = true
     }
     
-    // Show error state
-    func showError() {
+    /// Displays the error message and shows the retry button.
+    /// - Parameter error: The error to display.
+    func showError(_ error: Error?) {
         activityIndicator.stopAnimating()
+        if let networkError = error as? NetworkError {
+            errorLabel.text = networkError.errorDescription
+        } else {
+            errorLabel.text = "An unknown error occurred"
+        }
         errorLabel.isHidden = false
         retryButton.isHidden = false
     }
     
-    // Hide loading view
+    /// Hides the loading indicator and error messages.
     func hide() {
         activityIndicator.stopAnimating()
         self.isHidden = true

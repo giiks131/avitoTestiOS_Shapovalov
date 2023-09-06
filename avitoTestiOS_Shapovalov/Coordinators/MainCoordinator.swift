@@ -11,7 +11,7 @@ import UIKit
 class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     
     // MARK: - Properties
-
+    
     /// The UINavigationController to push and pop view controllers.
     let navigationController: UINavigationController
     
@@ -41,14 +41,13 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         detailVC.coordinator = self
         navigationController.pushViewController(detailVC, animated: true)
     }
-    
 }
 
 // MARK: - Coordinator Protocol
 
 /// Defines the basic structure and functionalities for a coordinator.
 protocol Coordinator {
-
+    
     /// The UINavigationController to push and pop view controllers.
     var navigationController: UINavigationController { get }
     
