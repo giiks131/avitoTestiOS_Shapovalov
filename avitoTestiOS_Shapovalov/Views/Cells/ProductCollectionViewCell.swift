@@ -7,13 +7,15 @@
 
 import UIKit
 
-// Custom Collection View Cell for displaying Product information
+/// Custom Collection View Cell for displaying Product information
 class ProductCollectionViewCell: UICollectionViewCell {
     
-    // Identifier for the cell
+    /// Identifier for the cell.
     static let identifier = "ProductCollectionViewCell"
     
-    // UI Elements
+    // MARK: - UI Elements
+    
+    /// UIImageView for displaying the product image.
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -23,6 +25,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    /// UILabel for displaying the product title.
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
@@ -33,6 +36,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    /// UILabel for displaying the product price.
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -41,6 +45,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    /// UILabel for displaying the product location.
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
@@ -49,6 +54,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    /// UILabel for displaying the product creation date.
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
@@ -57,7 +63,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    // Initialization
+    // MARK: - Initialization
+    
+    /// Initializes the cell and sets up its UI.
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -65,7 +73,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         
     }
     
-    // Prepare for cell reuse
+    /// Prepares the cell for reuse.
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
@@ -74,14 +82,16 @@ class ProductCollectionViewCell: UICollectionViewCell {
         locationLabel.text = nil
         dateLabel.text = nil
     }
-
     
-    // Required init
+    
+    /// Required initializer, not implemented.
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // Setup UI
+    // MARK: - UI Setup
+    
+    /// Sets up the UI elements in the cell.
     private func setupUI() {
         addSubview(imageView)
         addSubview(titleLabel)
@@ -90,6 +100,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         addSubview(dateLabel)
     }
     
+    /// Sets up the constraints for the UI elements.
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
@@ -118,7 +129,10 @@ class ProductCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    // Configure cell with model
+    // MARK: - Configuration
+    
+    /// Configures the cell with the given AdvertisementUIModel.
+    /// - Parameter model: The model to configure the cell.
     func configure(with model: AdvertisementUIModel) async {
         await imageView.loadImage(from: model.imageUrl, placeholder: UIImage(named: "placeholder"))
         self.titleLabel.text = model.title
