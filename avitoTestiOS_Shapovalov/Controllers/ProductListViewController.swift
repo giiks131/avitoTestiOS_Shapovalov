@@ -51,7 +51,7 @@ class ProductListViewController: UIViewController {
     /// Configures the view after loading.
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Advertisements"
+        self.title = "Объявления"
 
         setupLoadingView()
         setupRetryButton()
