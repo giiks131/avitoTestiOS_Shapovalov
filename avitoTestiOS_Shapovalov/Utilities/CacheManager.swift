@@ -18,9 +18,6 @@ class CacheManager {
     /// Private initializer for singleton pattern.
     private init() {}
     
-    /// In-memory cache dictionary.
-    private var cache: [String: Any] = [:]
-    
     /// DispatchQueue to handle cache operations asynchronously.
     private let cacheQueue = DispatchQueue(label: "com.avitoTestiOS_Shapovalov.CacheQueue")
     

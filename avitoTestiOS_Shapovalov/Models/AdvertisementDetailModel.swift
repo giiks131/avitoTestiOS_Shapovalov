@@ -62,7 +62,7 @@ struct AdvertisementDetailUIModel {
         self.title = model.title
         self.price = model.price
         self.location = model.location
-        self.imageUrl = URL(string: model.imageUrl) ?? URL(string: "https://example.com/placeholder")!
+        self.imageUrl = URL(string: model.imageUrl) ?? URL(string: "https://example.com/")! // empty url
         self.description = model.description
         self.email = model.email
         self.phoneNumber = model.phoneNumber
